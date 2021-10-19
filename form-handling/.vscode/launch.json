@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FormhandlingIntroApplication<formhandling-intro>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.packt.springboot.formhandling.FormhandlingIntroApplication",
+            "projectName": "formhandling-intro",
+            "args": ""
+        }
+    ]
+}
