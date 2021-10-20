@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ThymeleafValidationApplication<thymeleafValidation>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "co.edu.icesi.ci.thymeval.ThymeleafValidationApplication",
+            "projectName": "thymeleafValidation",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ThymeleafValidationApplication<thymeleaf-display-init>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "co.edu.icesi.ci.thymeval.ThymeleafValidationApplication",
+            "projectName": "thymeleaf-display-init",
+            "args": ""
+        }
+    ]
+}

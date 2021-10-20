@@ -21,18 +21,18 @@ import lombok.Data;
 public class Appointment {
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date;
-	
+
 	@DateTimeFormat(iso = ISO.TIME)
 	private LocalTime time;
-	
+
 	@ManyToOne
 	private User patient;
-	
+
 	@ManyToOne
 	private User doctor;
 }

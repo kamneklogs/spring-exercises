@@ -32,14 +32,6 @@ public class UserControllerImpl implements UserController {
 
 	}
 
-	@GetMapping("/users/del/{id}")
-	public String deleteUser(@PathVariable("id") long id, Model model) {
-		User user = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-		userService.delete(user);
-		model.addAttribute("users", userService.findAll());
-		return "users/index";
-	}
-
 	@GetMapping("/users/")
 	public String indexUser(Model model) {
 		model.addAttribute("users", userService.findAll());
@@ -68,9 +60,10 @@ public class UserControllerImpl implements UserController {
 				return "/users/add-user-first-validation";
 			}
 			// userService.save(user);
-			// model.addAttribute("user", new User());
+			model.addAttribute("user", user);
 			model.addAttribute("genders", userService.getGenders());
 			model.addAttribute("types", userService.getTypes());
+
 			return "/users/add-user-second-validation";
 		}
 
@@ -89,13 +82,25 @@ public class UserControllerImpl implements UserController {
 				log.info(bindingResult.getErrorCount());
 				log.info(bindingResult.getFieldError().getDefaultMessage());
 
-				return "/users/add-user-first-validation";
+				model.addAttribute("genders", userService.getGenders());
+				model.addAttribute("types", userService.getTypes());
+
+				return "/users/add-user-second-validation";
 			}
+
 			userService.save(user);
 
 			return "redirect:/users/";
 		}
 
+	}
+
+	@GetMapping("/users/del/{id}")
+	public String deleteUser(@PathVariable("id") long id, Model model) {
+		User user = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		userService.delete(user);
+		model.addAttribute("users", userService.findAll());
+		return "users/index";
 	}
 
 	@GetMapping("/users/edit/{id}")

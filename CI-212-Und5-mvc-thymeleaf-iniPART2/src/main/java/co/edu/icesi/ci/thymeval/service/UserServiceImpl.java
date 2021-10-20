@@ -13,7 +13,7 @@ import co.edu.icesi.ci.thymeval.repository.UserRepository;
 import co.edu.icesi.ci.thymeval.service.interfaces.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	private UserRepository userRepository;
 
@@ -35,15 +35,14 @@ public class UserServiceImpl implements UserService{
 	public Iterable<User> findAll() {
 		return userRepository.findAll();
 	}
-	
+
 	public Iterable<User> findAllPatients() {
 		return userRepository.findByType(UserType.patient);
 	}
-	
+
 	public Iterable<User> findAllDoctors() {
 		return userRepository.findByType(UserType.doctor);
 	}
-
 
 	public void delete(User user) {
 		userRepository.delete(user);
@@ -51,7 +50,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	public UserGender[] getGenders() {
-		
+
 		return UserGender.values();
 	}
 
