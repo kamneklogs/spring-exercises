@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import co.edu.icesi.tintegracion.model.hr.Employee;
 import co.edu.icesi.tintegracion.model.person.Person;
 import co.edu.icesi.tintegracion.repositories.PersonRepositoryInt;
 

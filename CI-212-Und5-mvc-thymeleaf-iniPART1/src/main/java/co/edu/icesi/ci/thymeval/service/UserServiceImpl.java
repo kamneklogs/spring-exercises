@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserType[] getTypes() {
-		// TODO Auto-generated method stub
 		return UserType.values();
 	}
 

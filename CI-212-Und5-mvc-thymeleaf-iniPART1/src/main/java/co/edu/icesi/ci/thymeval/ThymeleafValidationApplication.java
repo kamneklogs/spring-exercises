@@ -1,7 +1,6 @@
 package co.edu.icesi.ci.thymeval;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,7 +12,6 @@ import co.edu.icesi.ci.thymeval.model.User;
 import co.edu.icesi.ci.thymeval.model.UserGender;
 import co.edu.icesi.ci.thymeval.model.UserType;
 import co.edu.icesi.ci.thymeval.service.UserServiceImpl;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2

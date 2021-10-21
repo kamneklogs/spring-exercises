@@ -7,7 +7,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,7 +29,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.tintegracion.model.hr.Employee;
-import co.edu.icesi.tintegracion.model.hr.EmployeedepartmenthistoryPK;
 import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
 import co.edu.icesi.tintegracion.model.hr.EmployeepayhistoryPK;
 import co.edu.icesi.tintegracion.model.person.Businessentity;
@@ -45,9 +43,7 @@ import co.edu.icesi.tintegracion.repositories.ShiftRepositoryInt;
 import co.edu.icesi.tintegracion.services.EmployeeService;
 import co.edu.icesi.tintegracion.services.EmployeepayhistoryService;
 import co.edu.icesi.tintegracion.services.PersonService;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)
 @TestMethodOrder(OrderAnnotation.class)
@@ -147,7 +143,7 @@ public class TintegracionApplicationTests {
 	@Order(2)
 	public void editEmployee() {
 
-		Employee theEmployee = employeeService.findById(0).get();
+		// Employee theEmployee = employeeService.findById(0).get();
 
 	}
 

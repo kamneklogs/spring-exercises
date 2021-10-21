@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.ci.thymeval.controller.interfaces.UserController;
+import co.edu.icesi.ci.thymeval.model.CompleteInfo;
+import co.edu.icesi.ci.thymeval.model.CredentialsInfoValidation;
+import co.edu.icesi.ci.thymeval.model.PersonalInfoValidation;
 import co.edu.icesi.ci.thymeval.model.User;
-import co.edu.icesi.ci.thymeval.model.add1;
-import co.edu.icesi.ci.thymeval.model.add2;
-import co.edu.icesi.ci.thymeval.model.editValidations;
 import co.edu.icesi.ci.thymeval.service.UserServiceImpl;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -47,17 +46,18 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@PostMapping("/users/addUser1V")
-	public String saveUserV1(@Validated(add1.class) @ModelAttribute User user, BindingResult bindingResult, Model model,
-			@RequestParam(value = "action", required = true) String action) {
+	public String saveUserV1(@Validated(CredentialsInfoValidation.class) @ModelAttribute User user,
+			BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
 
 		if (action.equals("Cancel")) {
 			return "redirect:/users/";
 		} else {
 			if (bindingResult.hasErrors()) {
 
-				log.info("ERRROOORRRRRRRRRRRRRRRRRRRR");
+				log.info("ERRRxxxxxxxxxxxxxxxxxxOOORRRRRRRRRRRRRRRRRRRR");
 				log.info(bindingResult.getErrorCount());
 				log.info(bindingResult.getFieldError().getDefaultMessage());
+				log.info(bindingResult.getFieldError().getField());
 
 				return "/users/add-user-first-validation";
 			}
@@ -73,8 +73,8 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@PostMapping("/users/save")
-	public String saveUser(@Validated(add2.class) @ModelAttribute User user, BindingResult bindingResult, Model model,
-			@RequestParam(value = "action", required = true) String action) {
+	public String saveUser(@Validated(PersonalInfoValidation.class) @ModelAttribute User user,
+			BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
 
 		if (action.equals("Cancel")) {
 
@@ -83,9 +83,10 @@ public class UserControllerImpl implements UserController {
 		} else {
 
 			log.info(user.toString());
+			log.info(userService.findById(user.getId()).get().toString());
 
 			userService.saveUserSecondValidation(user);
-
+			log.info(userService.findById(user.getId()).get().toString());
 			return "redirect:/users/";
 		}
 
@@ -112,7 +113,7 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@PostMapping("/users/edit/{id}")
-	public String updateUser(@Validated(editValidations.class) @ModelAttribute User user, BindingResult bindingResult,
+	public String updateUser(@Validated(CompleteInfo.class) @ModelAttribute User user, BindingResult bindingResult,
 			Model model, @PathVariable("id") long id, @RequestParam(value = "action", required = true) String action) {
 
 		log.info(user.getUsername());
@@ -121,6 +122,7 @@ public class UserControllerImpl implements UserController {
 			if (bindingResult.hasErrors()) {
 				log.info("ERRROOORRRRRRRRRRRRRRRRRRRR");
 				log.info(bindingResult.getAllErrors().get(0).getDefaultMessage());
+				log.info(bindingResult.getFieldError().getField());
 				model.addAttribute("user", userService.findById(id).get());
 				model.addAttribute("genders", userService.getGenders());
 				model.addAttribute("types", userService.getTypes());

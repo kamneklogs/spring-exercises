@@ -24,55 +24,54 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@NotBlank(groups = editValidations.class)
-	@Size(min = 2, groups = { editValidations.class })
-	@NotBlank(groups = add2.class)
-	@Size(min = 2, groups = { add2.class })
+	@NotBlank(groups = { PersonalInfoValidation.class, CompleteInfo.class })
+	@Size(min = 2, groups = { PersonalInfoValidation.class, CompleteInfo.class })
 	private String name;
 
-	@NotBlank(groups = add1.class)
-	@Size(min = 3, groups = { add1.class })
+	@NotBlank(groups = CredentialsInfoValidation.class)
+	@Size(min = 3, groups = { CredentialsInfoValidation.class })
 	private String username;
 
-	@NotBlank(groups = add1.class)
-	@Size(min = 8, groups = { add1.class })
+	@NotNull(groups = CompleteInfo.class, message = "el tamaño debe ser de minimo 8")
+	@Size(min = 8, groups = { CredentialsInfoValidation.class })
 	private String password;
 
-	@NotBlank(groups = editValidations.class)
-	@Email(groups = { editValidations.class })
-	@NotBlank(groups = add2.class)
-	@Email(groups = { add2.class })
+	// @Email(groups = { CompleteInfo.class })
+	@NotBlank(groups = { PersonalInfoValidation.class, CompleteInfo.class })
+	@Email(groups = { PersonalInfoValidation.class, CompleteInfo.class })
 	private String email;
 
-	@NotNull(groups = add2.class)
+	@NotNull(groups = { PersonalInfoValidation.class, CompleteInfo.class })
 	private UserType type;
 
-	@Past(groups = editValidations.class)
-	@Past(groups = add1.class)
-	@NotNull(groups = add1.class)
+	@Past(groups = { CredentialsInfoValidation.class, CompleteInfo.class })
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
 
-	@NotNull(groups = add2.class)
+	@NotNull(groups = PersonalInfoValidation.class)
 	private UserGender gender;
 
-	@NotNull(groups = editValidations.class, message = "not match")
+	@NotNull(groups = CompleteInfo.class, message = "Contraseñas no coinciden")
 	private String confirmPassword;
 
 	public void setPassword(String password) {
 		this.password = password;
-		checkPassword();// check
+		verifyPasswordConstraints();
 	}
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
-		checkPassword();// check
+		verifyPasswordConstraints();
 	}
 
-	private void checkPassword() {
+	private void verifyPasswordConstraints() {
 		if (this.password == null || this.confirmPassword == null) {
 			return;
-		} else if (!this.password.equals(confirmPassword)) {
+		} else if (this.password.equals(confirmPassword)) {
+			if (!this.confirmPassword.isEmpty() && confirmPassword.length() < 8) {
+				password = null;
+			}
+		} else {
 			this.confirmPassword = null;
 		}
 	}
