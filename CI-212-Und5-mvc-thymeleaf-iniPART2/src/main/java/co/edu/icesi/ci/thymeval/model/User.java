@@ -24,6 +24,8 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	@NotBlank(groups = editValidations.class)
+	@Size(min = 2, groups = { editValidations.class })
 	@NotBlank(groups = add2.class)
 	@Size(min = 2, groups = { add2.class })
 	private String name;
@@ -36,6 +38,8 @@ public class User {
 	@Size(min = 8, groups = { add1.class })
 	private String password;
 
+	@NotBlank(groups = editValidations.class)
+	@Email(groups = { editValidations.class })
 	@NotBlank(groups = add2.class)
 	@Email(groups = { add2.class })
 	private String email;
@@ -43,6 +47,7 @@ public class User {
 	@NotNull(groups = add2.class)
 	private UserType type;
 
+	@Past(groups = editValidations.class)
 	@Past(groups = add1.class)
 	@NotNull(groups = add1.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -50,5 +55,26 @@ public class User {
 
 	@NotNull(groups = add2.class)
 	private UserGender gender;
+
+	@NotNull(groups = editValidations.class, message = "not match")
+	private String confirmPassword;
+
+	public void setPassword(String password) {
+		this.password = password;
+		checkPassword();// check
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+		checkPassword();// check
+	}
+
+	private void checkPassword() {
+		if (this.password == null || this.confirmPassword == null) {
+			return;
+		} else if (!this.password.equals(confirmPassword)) {
+			this.confirmPassword = null;
+		}
+	}
 
 }

@@ -7,7 +7,7 @@ import co.edu.icesi.ci.thymeval.model.UserGender;
 import co.edu.icesi.ci.thymeval.model.UserType;
 
 public interface UserService {
-	public void save(User user);
+	public User save(User user);
 
 	public Optional<User> findById(long id);
 
@@ -22,4 +22,6 @@ public interface UserService {
 	public UserGender[] getGenders();
 
 	public UserType[] getTypes();
+	
+	public void saveUserSecondValidation(User user);
 }

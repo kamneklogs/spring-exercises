@@ -22,9 +22,9 @@ public class UserServiceImpl implements UserService {
 		this.userRepository = userRepository;
 	}
 
-	public void save(User user) {
+	public User save(User user) {
 		userRepository.save(user);
-
+		return user;
 	}
 
 	public Optional<User> findById(long id) {
@@ -57,5 +57,14 @@ public class UserServiceImpl implements UserService {
 	public UserType[] getTypes() {
 		// TODO Auto-generated method stub
 		return UserType.values();
+	}
+	
+	public void saveUserSecondValidation(User user) {
+		User entityUser = userRepository.findById(user.getId()).get();
+		entityUser.setName(user.getName());
+		entityUser.setGender(user.getGender());
+		entityUser.setEmail(user.getEmail());
+		entityUser.setType(user.getType());
+		userRepository.save(entityUser);
 	}
 }

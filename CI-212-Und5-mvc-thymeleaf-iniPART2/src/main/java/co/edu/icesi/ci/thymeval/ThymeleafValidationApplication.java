@@ -28,6 +28,8 @@ public class ThymeleafValidationApplication {
 		UserServiceImpl u = c.getBean(UserServiceImpl.class);
 		User user1 = new User();
 		user1.setName("Juan");
+		user1.setUsername("charles777");
+		user1.setPassword("pass1");
 		user1.setEmail("jc@gmail.com");
 		user1.setType(UserType.doctor);
 		user1.setGender(UserGender.masculine);
@@ -36,6 +38,8 @@ public class ThymeleafValidationApplication {
 		u.save(user1);
 		User user2 = new User();
 		user2.setName("Ana");
+		user2.setUsername("nikita");
+		user2.setPassword("pass2");
 		user2.setEmail("ana@gmail.com");
 		user2.setType(UserType.patient);
 		user2.setGender(UserGender.femenine);

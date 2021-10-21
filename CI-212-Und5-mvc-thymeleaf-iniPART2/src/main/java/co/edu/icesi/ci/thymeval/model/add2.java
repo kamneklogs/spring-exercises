@@ -1,5 +1,5 @@
 package co.edu.icesi.ci.thymeval.model;
 
-public interface add2 {
+public interface add2 extends editValidations {
 
 }

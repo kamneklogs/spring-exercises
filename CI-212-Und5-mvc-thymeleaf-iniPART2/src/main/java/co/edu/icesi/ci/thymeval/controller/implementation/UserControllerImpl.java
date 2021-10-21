@@ -17,7 +17,9 @@ import co.edu.icesi.ci.thymeval.controller.interfaces.UserController;
 import co.edu.icesi.ci.thymeval.model.User;
 import co.edu.icesi.ci.thymeval.model.add1;
 import co.edu.icesi.ci.thymeval.model.add2;
+import co.edu.icesi.ci.thymeval.model.editValidations;
 import co.edu.icesi.ci.thymeval.service.UserServiceImpl;
+import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -59,7 +61,8 @@ public class UserControllerImpl implements UserController {
 
 				return "/users/add-user-first-validation";
 			}
-			// userService.save(user);
+			user.setId(userService.save(user).getId());
+
 			model.addAttribute("user", user);
 			model.addAttribute("genders", userService.getGenders());
 			model.addAttribute("types", userService.getTypes());
@@ -74,21 +77,14 @@ public class UserControllerImpl implements UserController {
 			@RequestParam(value = "action", required = true) String action) {
 
 		if (action.equals("Cancel")) {
+
+			userService.delete(user);
 			return "redirect:/users/";
 		} else {
-			if (bindingResult.hasErrors()) {
 
-				log.info("ERRROOORRRRRRRRRRRRRRRRRRRR");
-				log.info(bindingResult.getErrorCount());
-				log.info(bindingResult.getFieldError().getDefaultMessage());
+			log.info(user.toString());
 
-				model.addAttribute("genders", userService.getGenders());
-				model.addAttribute("types", userService.getTypes());
-
-				return "/users/add-user-second-validation";
-			}
-
-			userService.save(user);
+			userService.saveUserSecondValidation(user);
 
 			return "redirect:/users/";
 		}
@@ -111,13 +107,34 @@ public class UserControllerImpl implements UserController {
 		model.addAttribute("user", user.get());
 		model.addAttribute("genders", userService.getGenders());
 		model.addAttribute("types", userService.getTypes());
+
 		return "users/update-user";
 	}
 
 	@PostMapping("/users/edit/{id}")
-	public String updateUser(@PathVariable("id") long id,
-			@RequestParam(value = "action", required = true) String action, User user, Model model) {
+	public String updateUser(@Validated(editValidations.class) @ModelAttribute User user, BindingResult bindingResult,
+			Model model, @PathVariable("id") long id, @RequestParam(value = "action", required = true) String action) {
+
+		log.info(user.getUsername());
+
 		if (action != null && !action.equals("Cancel")) {
+			if (bindingResult.hasErrors()) {
+				log.info("ERRROOORRRRRRRRRRRRRRRRRRRR");
+				log.info(bindingResult.getAllErrors().get(0).getDefaultMessage());
+				model.addAttribute("user", userService.findById(id).get());
+				model.addAttribute("genders", userService.getGenders());
+				model.addAttribute("types", userService.getTypes());
+
+				return "users/update-user";
+			}
+
+			if (user.getPassword().isEmpty()) {
+
+				user.setPassword(userService.findById(id).get().getPassword());
+				log.info(user.getPassword() + "     1111111111");
+			}
+			log.info(user.getPassword() + "      2222222222222");
+
 			userService.save(user);
 			model.addAttribute("users", userService.findAll());
 		}
