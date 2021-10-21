@@ -25,27 +25,26 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@NotBlank(groups = { PersonalInfoValidation.class, CompleteInfo.class })
-	@Size(min = 2, groups = { PersonalInfoValidation.class, CompleteInfo.class })
+	@NotBlank(groups = { PersonalInfoValidation.class, CompleteInfoValidation.class })
+	@Size(min = 2, groups = { PersonalInfoValidation.class, CompleteInfoValidation.class })
 	private String name;
 
 	@NotBlank(groups = CredentialsInfoValidation.class)
 	@Size(min = 3, groups = { CredentialsInfoValidation.class })
 	private String username;
 
-	@NotNull(groups = CompleteInfo.class, message = "el tamaño debe ser de minimo 8")
+	@NotNull(groups = CompleteInfoValidation.class, message = "el tamaño debe ser de minimo 8")
 	@Size(min = 8, groups = { CredentialsInfoValidation.class })
 	private String password;
 
-	// @Email(groups = { CompleteInfo.class })
-	@NotBlank(groups = { PersonalInfoValidation.class, CompleteInfo.class })
-	@Email(groups = { PersonalInfoValidation.class, CompleteInfo.class })
+	@NotBlank(groups = { PersonalInfoValidation.class, CompleteInfoValidation.class })
+	@Email(groups = { PersonalInfoValidation.class, CompleteInfoValidation.class })
 	private String email;
 
-	@NotNull(groups = { PersonalInfoValidation.class, CompleteInfo.class })
+	@NotNull(groups = { PersonalInfoValidation.class, CompleteInfoValidation.class })
 	private UserType type;
 
-	@Past(groups = { CredentialsInfoValidation.class, CompleteInfo.class })
+	@Past(groups = { CredentialsInfoValidation.class, CompleteInfoValidation.class })
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
 
@@ -53,7 +52,7 @@ public class User {
 	private UserGender gender;
 
 	@Transient
-	@NotNull(groups = CompleteInfo.class, message = "Contraseñas no coinciden")
+	@NotNull(groups = CompleteInfoValidation.class, message = "Contraseñas no coinciden")
 	private String confirmPassword;
 
 	public void setPassword(String password) {

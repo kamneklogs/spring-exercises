@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.ci.thymeval.controller.interfaces.UserController;
-import co.edu.icesi.ci.thymeval.model.CompleteInfo;
+import co.edu.icesi.ci.thymeval.model.CompleteInfoValidation;
 import co.edu.icesi.ci.thymeval.model.CredentialsInfoValidation;
 import co.edu.icesi.ci.thymeval.model.PersonalInfoValidation;
 import co.edu.icesi.ci.thymeval.model.User;
@@ -54,11 +54,6 @@ public class UserControllerImpl implements UserController {
 		} else {
 			if (bindingResult.hasErrors()) {
 
-				log.info("ERRRxxxxxxxxxxxxxxxxxxOOORRRRRRRRRRRRRRRRRRRR");
-				log.info(bindingResult.getErrorCount());
-				log.info(bindingResult.getFieldError().getDefaultMessage());
-				log.info(bindingResult.getFieldError().getField());
-
 				return "/users/add-user-first-validation";
 			}
 			user.setId(userService.save(user).getId());
@@ -81,12 +76,13 @@ public class UserControllerImpl implements UserController {
 			userService.delete(user);
 			return "redirect:/users/";
 		} else {
-
-			log.info(user.toString());
-			log.info(userService.findById(user.getId()).get().toString());
+			if (bindingResult.hasErrors()) {
+				model.addAttribute("genders", userService.getGenders());
+				model.addAttribute("types", userService.getTypes());
+				return "/users/add-user-second-validation";
+			}
 
 			userService.saveUserSecondValidation(user);
-			log.info(userService.findById(user.getId()).get().toString());
 			return "redirect:/users/";
 		}
 
@@ -113,17 +109,13 @@ public class UserControllerImpl implements UserController {
 	}
 
 	@PostMapping("/users/edit/{id}")
-	public String updateUser(@Validated(CompleteInfo.class) @ModelAttribute User user, BindingResult bindingResult,
-			Model model, @PathVariable("id") long id, @RequestParam(value = "action", required = true) String action) {
-
-		log.info(user.getUsername());
+	public String updateUser(@Validated(CompleteInfoValidation.class) @ModelAttribute User user,
+			BindingResult bindingResult, Model model, @PathVariable("id") long id,
+			@RequestParam(value = "action", required = true) String action) {
 
 		if (action != null && !action.equals("Cancel")) {
 			if (bindingResult.hasErrors()) {
-				log.info("ERRROOORRRRRRRRRRRRRRRRRRRR");
-				log.info(bindingResult.getAllErrors().get(0).getDefaultMessage());
-				log.info(bindingResult.getFieldError().getField());
-				model.addAttribute("user", userService.findById(id).get());
+
 				model.addAttribute("genders", userService.getGenders());
 				model.addAttribute("types", userService.getTypes());
 
@@ -133,12 +125,9 @@ public class UserControllerImpl implements UserController {
 			if (user.getPassword().isEmpty()) {
 
 				user.setPassword(userService.findById(id).get().getPassword());
-				log.info(user.getPassword() + "     1111111111");
 			}
-			log.info(user.getPassword() + "      2222222222222");
 
 			userService.save(user);
-			model.addAttribute("users", userService.findAll());
 		}
 		return "redirect:/users/";
 	}
