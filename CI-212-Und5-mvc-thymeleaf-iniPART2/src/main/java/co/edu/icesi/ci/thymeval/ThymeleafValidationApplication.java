@@ -12,9 +12,7 @@ import co.edu.icesi.ci.thymeval.model.User;
 import co.edu.icesi.ci.thymeval.model.UserGender;
 import co.edu.icesi.ci.thymeval.model.UserType;
 import co.edu.icesi.ci.thymeval.service.UserServiceImpl;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @SpringBootApplication
 public class ThymeleafValidationApplication {
 
