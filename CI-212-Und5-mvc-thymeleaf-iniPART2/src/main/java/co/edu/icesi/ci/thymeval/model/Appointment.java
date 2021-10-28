@@ -34,9 +34,9 @@ public class Appointment {
 
 	@ManyToOne
 	@NotNull
-	private User patient;
+	private UserApp patient;
 
 	@NotNull
 	@ManyToOne
-	private User doctor;
+	private UserApp doctor;
 }

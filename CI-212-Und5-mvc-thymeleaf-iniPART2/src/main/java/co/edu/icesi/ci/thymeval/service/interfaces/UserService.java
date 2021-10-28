@@ -2,26 +2,26 @@ package co.edu.icesi.ci.thymeval.service.interfaces;
 
 import java.util.Optional;
 
-import co.edu.icesi.ci.thymeval.model.User;
+import co.edu.icesi.ci.thymeval.model.UserApp;
 import co.edu.icesi.ci.thymeval.model.UserGender;
 import co.edu.icesi.ci.thymeval.model.UserType;
 
 public interface UserService {
-	public User save(User user);
+	public UserApp save(UserApp user);
 
-	public Optional<User> findById(long id);
+	public Optional<UserApp> findById(long id);
 
-	public Iterable<User> findAll();
+	public Iterable<UserApp> findAll();
 
-	public Iterable<User> findAllPatients();
+	public Iterable<UserApp> findAllPatients();
 
-	public Iterable<User> findAllDoctors();
+	public Iterable<UserApp> findAllDoctors();
 
-	public void delete(User user);
+	public void delete(UserApp user);
 
 	public UserGender[] getGenders();
 
 	public UserType[] getTypes();
 	
-	public void saveUserSecondValidation(User user);
+	public void saveUserSecondValidation(UserApp user);
 }

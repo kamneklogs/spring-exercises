@@ -19,7 +19,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class User {
+public class UserApp {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

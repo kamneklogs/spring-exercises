@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.edu.icesi.ci.thymeval.model.User;
+import co.edu.icesi.ci.thymeval.model.UserApp;
 import co.edu.icesi.ci.thymeval.model.UserGender;
 import co.edu.icesi.ci.thymeval.model.UserType;
 import co.edu.icesi.ci.thymeval.repository.UserRepository;
@@ -23,29 +23,29 @@ public class UserServiceImpl implements UserService {
 		this.userRepository = userRepository;
 	}
 
-	public User save(User user) {
+	public UserApp save(UserApp user) {
 		userRepository.save(user);
 		return user;
 	}
 
-	public Optional<User> findById(long id) {
+	public Optional<UserApp> findById(long id) {
 
 		return userRepository.findById(id);
 	}
 
-	public Iterable<User> findAll() {
+	public Iterable<UserApp> findAll() {
 		return userRepository.findAll();
 	}
 
-	public Iterable<User> findAllPatients() {
+	public Iterable<UserApp> findAllPatients() {
 		return userRepository.findByType(UserType.patient);
 	}
 
-	public Iterable<User> findAllDoctors() {
+	public Iterable<UserApp> findAllDoctors() {
 		return userRepository.findByType(UserType.doctor);
 	}
 
-	public void delete(User user) {
+	public void delete(UserApp user) {
 		userRepository.delete(user);
 
 	}
@@ -59,10 +59,10 @@ public class UserServiceImpl implements UserService {
 		return UserType.values();
 	}
 
-	public void saveUserSecondValidation(User user) {
+	public void saveUserSecondValidation(UserApp user) {
 
 		log.info(user.getId()+"   SSSSSSSSSSSSSSSSSS");
-		User entityUser = userRepository.findById(user.getId()).get();
+		UserApp entityUser = userRepository.findById(user.getId()).get();
 		entityUser.setName(user.getName());
 		entityUser.setGender(user.getGender());
 		entityUser.setEmail(user.getEmail());
