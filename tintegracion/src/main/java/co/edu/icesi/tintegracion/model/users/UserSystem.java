@@ -14,6 +14,6 @@ public class UserSystem {
 
     private String password;
 
-    private UserType type;
+    private Usertypes type;
 
 }

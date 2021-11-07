@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import co.edu.icesi.tintegracion.model.hr.Employee;
 import co.edu.icesi.tintegracion.model.users.UserSystem;
-import co.edu.icesi.tintegracion.model.users.UserType;
+import co.edu.icesi.tintegracion.model.users.Usertypes;
 
 public interface UserService {
 
@@ -20,5 +20,5 @@ public interface UserService {
 
     public void delete(UserSystem user);
 
-    public UserType[] getTypes();
+    public Usertypes[] getTypes();
 }

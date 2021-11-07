@@ -7,10 +7,12 @@ import org.springframework.context.annotation.Bean;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import co.edu.icesi.tintegracion.model.users.UserSystem;
-import co.edu.icesi.tintegracion.model.users.UserType;
+import co.edu.icesi.tintegracion.model.users.Usertypes;
 import co.edu.icesi.tintegracion.services.implementations.UserServiceImp;
 import co.edu.icesi.tintegracion.services.interfaces.UserService;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @SpringBootApplication
 public class TintegracionApplication {
 	@Bean
@@ -26,15 +28,16 @@ public class TintegracionApplication {
 
 		UserSystem user1 = new UserSystem();
 		user1.setUsername("charles777");
-		user1.setPassword("{noop}password1");
-		user1.setType(UserType.ADMINISTRATOR);
+		user1.setPassword("password1");
+		user1.setType(Usertypes.ADMINISTRADOR);
+
 		userService.save(user1);
 
 		UserSystem user2 = new UserSystem();
-		user1.setUsername("andre123");
-		user1.setPassword("password2");
-		user1.setType(UserType.OPERATOR);
-		userService.save(user1);
+		user2.setUsername("andre123");
+		user2.setPassword("password2");
+		user2.setType(Usertypes.OPERADOR);
+		userService.save(user2);
 	}
 
 }

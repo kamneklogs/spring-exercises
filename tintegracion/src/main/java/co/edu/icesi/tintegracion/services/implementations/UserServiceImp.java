@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.icesi.tintegracion.model.users.UserSystem;
-import co.edu.icesi.tintegracion.model.users.UserType;
+import co.edu.icesi.tintegracion.model.users.Usertypes;
 import co.edu.icesi.tintegracion.repositories.UserRepository;
 import co.edu.icesi.tintegracion.services.interfaces.UserService;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Service
 public class UserServiceImp implements UserService {
 
@@ -21,6 +23,7 @@ public class UserServiceImp implements UserService {
 	}
 
 	public UserSystem save(UserSystem user) {
+
 		userRepository.save(user);
 		return user;
 	}
@@ -35,11 +38,11 @@ public class UserServiceImp implements UserService {
 	}
 
 	public Iterable<UserSystem> findAllAdministrators() {
-		return userRepository.findByType(UserType.ADMINISTRATOR);
+		return userRepository.findByType(Usertypes.ADMINISTRADOR);
 	}
 
 	public Iterable<UserSystem> findAllOperators() {
-		return userRepository.findByType(UserType.OPERATOR);
+		return userRepository.findByType(Usertypes.OPERADOR);
 	}
 
 	public void delete(UserSystem user) {
@@ -47,7 +50,7 @@ public class UserServiceImp implements UserService {
 
 	}
 
-	public UserType[] getTypes() {
-		return UserType.values();
+	public Usertypes[] getTypes() {
+		return Usertypes.values();
 	}
 }

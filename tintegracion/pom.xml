@@ -8,9 +8,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>co.edu.icesi</groupId>
-	<artifactId>tintegracion</artifactId>
+	<artifactId>TallerThymeleaf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tintegracion</name>
+	<name>TallerThymeleaf</name>
 	<description>Taller 2</description>
 	<dependencies>
 		<dependency>
