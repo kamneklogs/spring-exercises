@@ -10,15 +10,15 @@ import co.edu.icesi.tintegracion.model.hr.Employeedepartmenthistory;
 import co.edu.icesi.tintegracion.model.hr.Shift;
 import co.edu.icesi.tintegracion.repositories.EmployeeDepartmentHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
-import co.edu.icesi.tintegracion.services.interfaces.EmployeeDepartmentHistoryServiceInt;
+import co.edu.icesi.tintegracion.services.interfaces.EmployeeDepartmentHistoryService;
 
 @Service
-public class EmployeeDepartmentHistoryService implements EmployeeDepartmentHistoryServiceInt{
+public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHistoryService{
 
     private EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt;
     private EmployeeRepositoryInt employeeRepositoryInt;
 
-    public EmployeeDepartmentHistoryService(
+    public EmployeeDepartmentHistoryServiceImp(
             EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt,
             EmployeeRepositoryInt employeeRepositoryInt) {
         this.employeeDepartmentHistoryRepositoryInt = employeeDepartmentHistoryRepositoryInt;

@@ -11,15 +11,15 @@ import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
 import co.edu.icesi.tintegracion.model.hr.EmployeepayhistoryPK;
 import co.edu.icesi.tintegracion.repositories.EmployeePayHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
-import co.edu.icesi.tintegracion.services.interfaces.EmployeePayHistoryServiceInt;
+import co.edu.icesi.tintegracion.services.interfaces.EmployeePayHistoryService;
 
 @Service
-public class EmployeepayhistoryService implements EmployeePayHistoryServiceInt {
+public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
 
     private EmployeePayHistoryRepositoryInt employeePayHistoryRepositoryInt;
     private EmployeeRepositoryInt employeeRepositoryInt;
 
-    public EmployeepayhistoryService(EmployeePayHistoryRepositoryInt employeePayHistoryRepositoryInt,
+    public EmployeepayhistoryServiceImp(EmployeePayHistoryRepositoryInt employeePayHistoryRepositoryInt,
             EmployeeRepositoryInt employeeRepositoryInt) {
         this.employeePayHistoryRepositoryInt = employeePayHistoryRepositoryInt;
         this.employeeRepositoryInt = employeeRepositoryInt;

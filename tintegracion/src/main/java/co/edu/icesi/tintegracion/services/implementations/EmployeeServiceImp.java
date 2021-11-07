@@ -10,10 +10,10 @@ import co.edu.icesi.tintegracion.model.person.Person;
 import co.edu.icesi.tintegracion.repositories.BussinesEntityRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.PersonRepositoryInt;
-import co.edu.icesi.tintegracion.services.interfaces.EmployeeServiceInt;
+import co.edu.icesi.tintegracion.services.interfaces.EmployeeService;
 
 @Service
-public class EmployeeService  implements EmployeeServiceInt{
+public class EmployeeServiceImp  implements EmployeeService{
 
     private EmployeeRepositoryInt employeeRepositoryInt;
 
@@ -21,7 +21,7 @@ public class EmployeeService  implements EmployeeServiceInt{
 
     private BussinesEntityRepositoryInt businessEntityRepositoryInt;
 
-    public EmployeeService(EmployeeRepositoryInt employeeRepositoryInt, PersonRepositoryInt personRepositoryInt,
+    public EmployeeServiceImp(EmployeeRepositoryInt employeeRepositoryInt, PersonRepositoryInt personRepositoryInt,
             BussinesEntityRepositoryInt businessEntityRepositoryInt) {
         this.employeeRepositoryInt = employeeRepositoryInt;
         this.personRepositoryInt = personRepositoryInt;

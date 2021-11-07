@@ -3,7 +3,7 @@ package co.edu.icesi.tintegracion.services.interfaces;
 import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
 import co.edu.icesi.tintegracion.model.hr.EmployeepayhistoryPK;
 
-public interface EmployeePayHistoryServiceInt {
+public interface EmployeePayHistoryService {
 
     public Employeepayhistory save(Integer employeeId, Employeepayhistory employeepayhistory,
             EmployeepayhistoryPK employeepayhistoryPk);

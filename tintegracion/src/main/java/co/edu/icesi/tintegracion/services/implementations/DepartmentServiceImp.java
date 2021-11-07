@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 
 import co.edu.icesi.tintegracion.model.hr.Department;
 import co.edu.icesi.tintegracion.repositories.DepartmentRepositoryInt;
-import co.edu.icesi.tintegracion.services.interfaces.DepartmentServiceInt;
+import co.edu.icesi.tintegracion.services.interfaces.DepartmentService;
 
 @Service
-public class DepartmentService implements DepartmentServiceInt{
+public class DepartmentServiceImp implements DepartmentService{
 
     private DepartmentRepositoryInt departmentRepositoryInt;
 
-    public DepartmentService(DepartmentRepositoryInt departmentRepositoryInt) {
+    public DepartmentServiceImp(DepartmentRepositoryInt departmentRepositoryInt) {
         this.departmentRepositoryInt = departmentRepositoryInt;
     }
 

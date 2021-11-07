@@ -2,7 +2,7 @@ package co.edu.icesi.tintegracion.services.interfaces;
 
 import co.edu.icesi.tintegracion.model.hr.Employeedepartmenthistory;
 
-public interface EmployeeDepartmentHistoryServiceInt {
+public interface EmployeeDepartmentHistoryService {
 
     public Employeedepartmenthistory save(Employeedepartmenthistory employeedepartmenthistory, Integer employeeId);
 
