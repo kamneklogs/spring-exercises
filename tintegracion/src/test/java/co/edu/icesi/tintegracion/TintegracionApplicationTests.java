@@ -122,7 +122,7 @@ public class TintegracionApplicationTests {
 
 		when(employeeRepositoryInt.findById(0)).thenReturn(Optional.of(employee));
 
-		employeeService.save(employee);
+		//employeeService.save(employee);
 
 		Employee theEmployee = employeeService.findById(0).get();
 
@@ -172,7 +172,7 @@ public class TintegracionApplicationTests {
 		employeepayhistoryPk.setBusinessentityid(bussinesEntity.getBusinessentityid());
 
 		employeepayhistory.setId(employeepayhistoryPk);
-		employeepayhistoryService.save(employeepayhistory);
+		//employeepayhistoryService.save(employeepayhistory);
 
 		when(employeePayHistoryInt.findById(employeepayhistoryPk)).thenReturn(Optional.of(employeepayhistory));
 
