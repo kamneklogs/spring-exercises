@@ -1,4 +1,4 @@
-package co.edu.icesi.tintegracion.services;
+package co.edu.icesi.tintegracion.services.implementations;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -11,9 +11,10 @@ import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
 import co.edu.icesi.tintegracion.model.hr.EmployeepayhistoryPK;
 import co.edu.icesi.tintegracion.repositories.EmployeePayHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
+import co.edu.icesi.tintegracion.services.interfaces.EmployeePayHistoryServiceInt;
 
 @Service
-public class EmployeepayhistoryService {
+public class EmployeepayhistoryService implements EmployeePayHistoryServiceInt {
 
     private EmployeePayHistoryRepositoryInt employeePayHistoryRepositoryInt;
     private EmployeeRepositoryInt employeeRepositoryInt;

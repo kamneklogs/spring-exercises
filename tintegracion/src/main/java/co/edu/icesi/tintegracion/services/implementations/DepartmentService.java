@@ -1,4 +1,4 @@
-package co.edu.icesi.tintegracion.services;
+package co.edu.icesi.tintegracion.services.implementations;
 
 import java.sql.Timestamp;
 
@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 
 import co.edu.icesi.tintegracion.model.hr.Department;
 import co.edu.icesi.tintegracion.repositories.DepartmentRepositoryInt;
+import co.edu.icesi.tintegracion.services.interfaces.DepartmentServiceInt;
 
 @Service
-public class DepartmentService {
+public class DepartmentService implements DepartmentServiceInt{
 
     private DepartmentRepositoryInt departmentRepositoryInt;
 
@@ -41,3 +42,4 @@ public class DepartmentService {
     }
 
 }
+    

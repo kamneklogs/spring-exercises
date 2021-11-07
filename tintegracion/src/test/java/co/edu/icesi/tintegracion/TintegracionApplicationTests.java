@@ -40,9 +40,9 @@ import co.edu.icesi.tintegracion.repositories.EmployeePayHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.PersonRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.ShiftRepositoryInt;
-import co.edu.icesi.tintegracion.services.EmployeeService;
-import co.edu.icesi.tintegracion.services.EmployeepayhistoryService;
-import co.edu.icesi.tintegracion.services.PersonService;
+import co.edu.icesi.tintegracion.services.implementations.EmployeeService;
+import co.edu.icesi.tintegracion.services.implementations.EmployeepayhistoryService;
+import co.edu.icesi.tintegracion.services.implementations.PersonService;
 
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)

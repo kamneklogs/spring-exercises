@@ -1,4 +1,4 @@
-package co.edu.icesi.tintegracion.services;
+package co.edu.icesi.tintegracion.services.implementations;
 
 import java.util.Optional;
 
@@ -10,9 +10,10 @@ import co.edu.icesi.tintegracion.model.person.Person;
 import co.edu.icesi.tintegracion.repositories.BussinesEntityRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.PersonRepositoryInt;
+import co.edu.icesi.tintegracion.services.interfaces.EmployeeServiceInt;
 
 @Service
-public class EmployeeService {
+public class EmployeeService  implements EmployeeServiceInt{
 
     private EmployeeRepositoryInt employeeRepositoryInt;
 
@@ -60,23 +61,19 @@ public class EmployeeService {
 
         if (employee == null) {
             throw new RuntimeException("Employee cannot be null");
-        } else {
-
-            if (!employeeToEdit.isPresent()) {
-                if (person.isEmpty()) {
-                    throw new RuntimeException("Person not exists");
-                } else if (bussinessEntity.isEmpty()) {
-                    throw new RuntimeException("Business entity not exists");
-                } else if (employee.getGender() == null) {
-                    throw new RuntimeException("employee gender cannot be null");
-                } else if (employee.getHiredate() == null) {
-                    throw new RuntimeException("Employee hiredate cannot be null");
-                } else if (employee.getJobtitle() == null || employee.getJobtitle().length() < 5) {
-                    throw new RuntimeException("Employee jobtitle invalid");
-                }
+        } else if (!employeeToEdit.isPresent()) {
+            if (person.isEmpty()) {
+                throw new RuntimeException("Person not exists");
+            } else if (bussinessEntity.isEmpty()) {
+                throw new RuntimeException("Business entity not exists");
+            } else if (employee.getGender() == null) {
+                throw new RuntimeException("employee gender cannot be null");
+            } else if (employee.getHiredate() == null) {
+                throw new RuntimeException("Employee hiredate cannot be null");
+            } else if (employee.getJobtitle() == null || employee.getJobtitle().length() < 5) {
+                throw new RuntimeException("Employee jobtitle invalid");
             }
         }
-    
 
         Employee newEmployee = employeeToEdit.get();
 
@@ -87,16 +84,12 @@ public class EmployeeService {
         bussinessEntity.get().setPerson(person.get());
         person.get().setBusinessentity(bussinessEntity.get());
         newEmployee.setBusinessentityid(businessId);
-        
+
         return employeeRepositoryInt.save(newEmployee);
     }
 
     public Optional<Employee> findById(int i) {
         return employeeRepositoryInt.findById(i);
-    }
-
-    public Employee editEmployee() {
-        return null;
     }
 
 }
