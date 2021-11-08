@@ -7,4 +7,8 @@ import co.edu.icesi.tintegracion.model.person.Person;
 public interface PersonService {
     public Optional<Person> findById(int i);
 
+    public Iterable<Person> findAll();
+
+    public Person save(Person person);
+
 }
