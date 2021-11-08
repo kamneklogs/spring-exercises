@@ -38,11 +38,11 @@ public class UserServiceImp implements UserService {
 	}
 
 	public Iterable<UserSystem> findAllAdministrators() {
-		return userRepository.findByType(Usertypes.ADMINISTRADOR);
+		return userRepository.findByType(Usertypes.ADMINISTRATOR);
 	}
 
 	public Iterable<UserSystem> findAllOperators() {
-		return userRepository.findByType(Usertypes.OPERADOR);
+		return userRepository.findByType(Usertypes.OPERATOR);
 	}
 
 	public void delete(UserSystem user) {

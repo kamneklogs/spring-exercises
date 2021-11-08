@@ -28,15 +28,15 @@ public class TintegracionApplication {
 
 		UserSystem user1 = new UserSystem();
 		user1.setUsername("charles777");
-		user1.setPassword("password1");
-		user1.setType(Usertypes.ADMINISTRADOR);
+		user1.setPassword("{noop}password1");
+		user1.setType(Usertypes.ADMINISTRATOR);
 
 		userService.save(user1);
 
 		UserSystem user2 = new UserSystem();
 		user2.setUsername("andre123");
-		user2.setPassword("password2");
-		user2.setType(Usertypes.OPERADOR);
+		user2.setPassword("{noop}password2");
+		user2.setType(Usertypes.OPERATOR);
 		userService.save(user2);
 	}
 

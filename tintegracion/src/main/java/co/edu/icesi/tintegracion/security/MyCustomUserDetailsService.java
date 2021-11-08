@@ -13,6 +13,7 @@ import co.edu.icesi.tintegracion.model.users.UserSystem;
 import co.edu.icesi.tintegracion.repositories.UserRepository;
 import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Service
 public class MyCustomUserDetailsService implements UserDetailsService {
 
@@ -22,12 +23,15 @@ public class MyCustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
+		log.info(username + "XXXXXXXXXXXXXXXXXXXXXXXXX");
 		UserSystem userApp = userRepository.findById(username).get();
 
+		log.info(userApp.getUsername() + "YYYYYYYYYYYYYYYYYYYYYYYYYYY");
 		if (userApp != null) {
 
 			User.UserBuilder builder = User.withUsername(username).password(userApp.getPassword())
 					.roles(userApp.getType().toString());
+			log.info(userApp.getPassword() + "YYYYYYYYYYYYYYYYYYYYYYYYYYY");
 
 			return builder.build();
 		} else {

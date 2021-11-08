@@ -56,9 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// se deshabilita para que funcionen las peticiones a los rest controllers, es
 				// mala practica deshabilitarlo, corregirlo de otra manera
 				// .authorizeRequests().anyRequest().authenticated().and()
-				.formLogin().loginPage("/login").permitAll().and().authorizeRequests().antMatchers("/users/**")
-				.hasRole(Usertypes.ADMINISTRADOR.toString()).antMatchers("/apps/**")
-				.hasRole(Usertypes.OPERADOR.toString()).anyRequest().authenticated().and().httpBasic().and().logout()
+				.formLogin().loginPage("/login").defaultSuccessUrl("/index.html").permitAll().and().authorizeRequests().antMatchers("/users/**")
+				.hasRole(Usertypes.ADMINISTRATOR.toString()).antMatchers("/apps/**")
+				.hasRole(Usertypes.OPERATOR.toString()).anyRequest().authenticated().and().httpBasic().and().logout()
 				.invalidateHttpSession(true).clearAuthentication(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
 				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
