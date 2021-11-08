@@ -34,6 +34,7 @@ public class TintegracionApplication {
 		user1.setPassword("{noop}pass1");
 		user1.setType(Usertypes.ADMINISTRATOR);
 
+		
 		userService.save(user1);
 
 		UserSystem user2 = new UserSystem();
