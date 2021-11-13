@@ -15,7 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * The persistent class for the employee database table.
@@ -28,17 +28,17 @@ public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "EMPLOYEE_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "EMPLOYEE_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMPLOYEE_BUSINESSENTITYID_GENERATOR")
 	private Integer businessentityid;
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthdate;
 
 	private String currentflag;
 
 	private String gender;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date hiredate;
 

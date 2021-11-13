@@ -11,9 +11,9 @@ public interface EmployeePayHistoryService {
             EmployeepayhistoryPK employeepayhistoryPk);
 
     public Employeepayhistory edit(Integer employeeId, Employeepayhistory employeepayhistory,
-            EmployeepayhistoryPK employeepayhistoryPk);
+            Integer employeepayhistoryPk);
 
-    public Employeepayhistory findById(EmployeepayhistoryPK employeepayhistoryPk);
+    public Employeepayhistory findById(Integer employeepayhistoryPk);
 
     public Iterable<Employeepayhistory> findAll();
 }

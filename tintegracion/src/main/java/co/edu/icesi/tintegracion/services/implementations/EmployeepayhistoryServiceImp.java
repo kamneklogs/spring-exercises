@@ -41,20 +41,18 @@ public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
             throw new RuntimeException("Payfrequency is invalid");
         }
 
-        employeepayhistory.setId(employeepayhistoryPk);
-
         employeepayhistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
 
         return employeePayHistoryRepositoryInt.save(employeepayhistory);
     }
 
     public Employeepayhistory edit(Integer employeeId, Employeepayhistory employeepayhistory,
-            EmployeepayhistoryPK employeepayhistoryPk) {
+            Integer employeepayhistoryId) {
 
         Optional<Employee> employee = employeeRepositoryInt.findById(employeeId);
 
         Optional<Employeepayhistory> employeepayhistoryToEdit = employeePayHistoryRepositoryInt
-                .findById(employeepayhistoryPk);
+                .findById(employeepayhistoryId);
 
         if (!employeepayhistoryToEdit.isPresent()) {
             throw new RuntimeException("Employeepayhistory not found");
@@ -76,19 +74,17 @@ public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
         newEmployeepayHistory.setPayfrequency(employeepayhistory.getPayfrequency());
         newEmployeepayHistory.setRate(employeepayhistory.getRate());
 
-        newEmployeepayHistory.setId(employeepayhistoryPk);
-
         newEmployeepayHistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
 
         return employeePayHistoryRepositoryInt.save(newEmployeepayHistory);
     }
 
-    public Employeepayhistory findById(EmployeepayhistoryPK employeepayhistoryPk) {
+    public Employeepayhistory findById(Integer employeepayhistoryPk) {
         return employeePayHistoryRepositoryInt.findById(employeepayhistoryPk).get();
     }
 
     @Override
-    public Iterable<Employeepayhistory> findAll() {        // TODO Auto-generated method stub
+    public Iterable<Employeepayhistory> findAll() { // TODO Auto-generated method stub
 
         return employeePayHistoryRepositoryInt.findAll();
     }

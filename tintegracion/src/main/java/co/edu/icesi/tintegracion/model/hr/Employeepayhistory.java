@@ -6,9 +6,13 @@ import java.sql.Timestamp;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 
 /**
  * The persistent class for the employeepayhistory database table.
@@ -19,8 +23,10 @@ import javax.persistence.NamedQuery;
 public class Employeepayhistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private EmployeepayhistoryPK id;
+	@Id
+	@SequenceGenerator(name = "PAY_HISTORY_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "PAY_HISTORY_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PERSON_BUSINESSENTITYID_GENERATOR")
+	private Integer businessentityid;
 
 	private Timestamp modifieddate;
 
@@ -40,10 +46,6 @@ public class Employeepayhistory implements Serializable {
 		return this.employee;
 	}
 
-	public EmployeepayhistoryPK getId() {
-		return this.id;
-	}
-
 	public Timestamp getModifieddate() {
 		return this.modifieddate;
 	}
@@ -58,10 +60,6 @@ public class Employeepayhistory implements Serializable {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-
-	public void setId(EmployeepayhistoryPK id) {
-		this.id = id;
 	}
 
 	public void setModifieddate(Timestamp modifieddate) {
