@@ -13,9 +13,7 @@ import co.edu.icesi.tintegracion.services.implementations.PersonServiceImp;
 import co.edu.icesi.tintegracion.services.implementations.UserServiceImp;
 import co.edu.icesi.tintegracion.services.interfaces.PersonService;
 import co.edu.icesi.tintegracion.services.interfaces.UserService;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @SpringBootApplication
 public class TintegracionApplication {
 	@Bean

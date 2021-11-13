@@ -2,7 +2,6 @@ package co.edu.icesi.tintegracion.services.implementations;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -84,7 +83,7 @@ public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
     }
 
     @Override
-    public Iterable<Employeepayhistory> findAll() { // TODO Auto-generated method stub
+    public Iterable<Employeepayhistory> findAll() {
 
         return employeePayHistoryRepositoryInt.findAll();
     }

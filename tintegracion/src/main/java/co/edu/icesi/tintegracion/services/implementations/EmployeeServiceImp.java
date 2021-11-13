@@ -32,7 +32,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     public Employee save(Employee employee) {
 
-        log.info(employee.getBusinessentityid()+"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        log.info(employee.getBusinessentityid() + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         return employeeRepositoryInt.save(employee);
     }
 
@@ -41,22 +41,6 @@ public class EmployeeServiceImp implements EmployeeService {
         Optional<Person> person = personRepositoryInt.findById(personId);
         Optional<Businessentity> bussinessEntity = businessEntityRepositoryInt.findById(businessId);
         Optional<Employee> employeeToEdit = employeeRepositoryInt.findById(employee.getBusinessentityid());
-
-        if (employee == null) {
-            throw new RuntimeException("Employee cannot be null");
-        } else if (!employeeToEdit.isPresent()) {
-            if (person.isEmpty()) {
-                throw new RuntimeException("Person not exists");
-            } else if (bussinessEntity.isEmpty()) {
-                throw new RuntimeException("Business entity not exists");
-            } else if (employee.getGender() == null) {
-                throw new RuntimeException("employee gender cannot be null");
-            } else if (employee.getHiredate() == null) {
-                throw new RuntimeException("Employee hiredate cannot be null");
-            } else if (employee.getJobtitle() == null || employee.getJobtitle().length() < 5) {
-                throw new RuntimeException("Employee jobtitle invalid");
-            }
-        }
 
         Employee newEmployee = employeeToEdit.get();
 

@@ -9,9 +9,7 @@ import co.edu.icesi.tintegracion.model.users.UserSystem;
 import co.edu.icesi.tintegracion.model.users.Usertypes;
 import co.edu.icesi.tintegracion.repositories.UserRepository;
 import co.edu.icesi.tintegracion.services.interfaces.UserService;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Service
 public class UserServiceImp implements UserService {
 

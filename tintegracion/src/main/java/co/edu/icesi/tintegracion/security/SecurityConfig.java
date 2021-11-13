@@ -7,9 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import co.edu.icesi.tintegracion.model.users.Usertypes;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

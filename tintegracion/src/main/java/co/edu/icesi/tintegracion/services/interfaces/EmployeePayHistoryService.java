@@ -1,6 +1,5 @@
 package co.edu.icesi.tintegracion.services.interfaces;
 
-import java.util.List;
 
 import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
 import co.edu.icesi.tintegracion.model.hr.EmployeepayhistoryPK;

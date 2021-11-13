@@ -34,9 +34,9 @@ public class Person implements Serializable {
 
 	private Integer emailpromotion;
 
-	private String firstname;//TODO
+	private String firstname;
 
-	private String lastname;//TODO
+	private String lastname;
 
 	private String middlename;
 
@@ -50,7 +50,7 @@ public class Person implements Serializable {
 
 	private String suffix;
 
-	private String title;//TODO
+	private String title;
 
 	// bi-directional many-to-one association to Businessentitycontact
 	@OneToMany(mappedBy = "person")
