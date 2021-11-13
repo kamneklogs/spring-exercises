@@ -23,15 +23,12 @@ public class MyCustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		log.info(username + "XXXXXXXXXXXXXXXXXXXXXXXXX");
 		UserSystem userApp = userRepository.findById(username).get();
 
-		log.info(userApp.getUsername() + "YYYYYYYYYYYYYYYYYYYYYYYYYYY");
 		if (userApp != null) {
 
 			User.UserBuilder builder = User.withUsername(username).password(userApp.getPassword())
 					.roles(userApp.getType().toString());
-			log.info(userApp.getPassword() + "YYYYYYYYYYYYYYYYYYYYYYYYYYY");
 
 			return builder.build();
 		} else {

@@ -34,7 +34,6 @@ public class TintegracionApplication {
 		user1.setPassword("{noop}pass1");
 		user1.setType(Usertypes.ADMINISTRATOR);
 
-		
 		userService.save(user1);
 
 		UserSystem user2 = new UserSystem();
@@ -43,19 +42,21 @@ public class TintegracionApplication {
 		user2.setType(Usertypes.OPERATOR);
 		userService.save(user2);
 
-		PersonService personService  = c.getBean(PersonServiceImp.class);
-
+		PersonService personService = c.getBean(PersonServiceImp.class);
 
 		Person person = new Person();
 
 		person.setFirstname("Camilo");
+		person.setLastname("Escobar");
+		person.setTitle("Developer");
 
 		personService.save(person);
-
 
 		Person person2 = new Person();
 
 		person2.setFirstname("Andre :)");
+		person2.setLastname("Rodriguez");
+		person2.setTitle("Product owner");
 
 		personService.save(person2);
 	}

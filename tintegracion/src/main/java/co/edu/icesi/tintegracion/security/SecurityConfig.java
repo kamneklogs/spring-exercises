@@ -50,7 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 * .permitAll().and().exceptionHandling().accessDeniedHandler(
 		 * accessDeniedHandler)
 		 */
-		log.info("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
 
 		httpSecurity// .userDetailsService(myCustomUserDetailsService)
 				// se deshabilita para que funcionen las peticiones a los rest controllers, es
@@ -62,6 +61,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true).clearAuthentication(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
 				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-		log.info("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
 	}
 }
