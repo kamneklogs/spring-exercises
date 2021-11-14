@@ -39,22 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-		// httpSecurity.authorizeRequests().antMatchers("/secure/**").authenticated().anyRequest().authenticated().and()
-		// .formLogin().loginPage("/login").permitAll().and().authorizeRequests().antMatchers("/users/**").hasRole(UserType.ADMIN.toString()).anyRequest().authenticated();
-		/*
-		 * .and().logout().invalidateHttpSession(true).clearAuthentication(true)
-		 * .logoutRequestMatcher(new
-		 * AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-		 * .permitAll().and().exceptionHandling().accessDeniedHandler(
-		 * accessDeniedHandler)
-		 */
-
-		httpSecurity// .userDetailsService(myCustomUserDetailsService)
-				// se deshabilita para que funcionen las peticiones a los rest controllers, es
-				// mala practica deshabilitarlo, corregirlo de otra manera
-				// .authorizeRequests().anyRequest().authenticated().and()
-				.formLogin().loginPage("/login").defaultSuccessUrl("/index.html").permitAll().and().authorizeRequests().antMatchers("/users/**")
-				.hasRole(Usertypes.ADMINISTRATOR.toString()).antMatchers("/apps/**")
+		httpSecurity.formLogin().loginPage("/login").defaultSuccessUrl("/index.html").permitAll().and()
+				.authorizeRequests().antMatchers("/people/**").hasRole(Usertypes.ADMINISTRATOR.toString())
+				.antMatchers("/payment/**").hasRole(Usertypes.ADMINISTRATOR.toString()).antMatchers("/departments/**")
+				.hasRole(Usertypes.OPERATOR.toString()).antMatchers("/departmentsHistory/**")
 				.hasRole(Usertypes.OPERATOR.toString()).anyRequest().authenticated().and().httpBasic().and().logout()
 				.invalidateHttpSession(true).clearAuthentication(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")

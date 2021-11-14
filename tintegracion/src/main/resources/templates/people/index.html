@@ -33,6 +33,7 @@
                   <th>First name</th>
                   <th>Last name</th>
                   <th>Title</th>
+                  <th>Details</th>
                   <th>Edit</th>
                   <th>Delete</th>
                 </tr>
@@ -49,8 +50,15 @@
 
                   <td class="text-info" th:text="${person.title}"></td>
 
+                  <td>
+                    <a
+                      th:href="@{/people/showDetails/{id}(id=${person.businessentityid})}"
+                      class="btn btn-primary"
+                    >
+                      <i class="far fa-eye"></i>
+                    </a>
+                  </td>
 
-                  
                   <td>
                     <a
                       th:href="@{/people/edit/{id}(id=${person.businessentityid})}"
