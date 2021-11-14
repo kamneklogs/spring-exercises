@@ -40,8 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
 		httpSecurity.formLogin().loginPage("/login").defaultSuccessUrl("/index.html").permitAll().and()
-				.authorizeRequests().antMatchers("/people/**").hasRole(Usertypes.ADMINISTRATOR.toString())
-				.antMatchers("/payment/**").hasRole(Usertypes.ADMINISTRATOR.toString()).antMatchers("/departments/**")
+				.authorizeRequests().antMatchers("/payment/**").hasRole(Usertypes.ADMINISTRATOR.toString())
+				.antMatchers("/people/**").hasRole(Usertypes.ADMINISTRATOR.toString()).antMatchers("/departments/**")
 				.hasRole(Usertypes.OPERATOR.toString()).antMatchers("/departmentsHistory/**")
 				.hasRole(Usertypes.OPERATOR.toString()).anyRequest().authenticated().and().httpBasic().and().logout()
 				.invalidateHttpSession(true).clearAuthentication(true)
