@@ -5,13 +5,10 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 
 /**
  * The persistent class for the employeepayhistory database table.
@@ -23,8 +20,6 @@ public class Employeepayhistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "PAY_HISTORY_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "PAY_HISTORY_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PERSON_BUSINESSENTITYID_GENERATOR")
 	private Integer businessentityid;
 
 	private Timestamp modifieddate;
@@ -34,9 +29,17 @@ public class Employeepayhistory implements Serializable {
 	private BigDecimal rate;
 
 	// bi-directional many-to-one association to Employee
-	@ManyToOne
-	@JoinColumn(name = "businessentityid", insertable = false, updatable = false)
+/* 	@ManyToOne
+	@JoinColumn(name = "businessentityid", insertable = false, updatable = false) */
 	private Employee employee;
+
+	public Integer getBusinessentityid() {
+		return businessentityid;
+	}
+
+	public void setBusinessentityid(Integer businessentityid) {
+		this.businessentityid = businessentityid;
+	}
 
 	public Employeepayhistory() {
 	}

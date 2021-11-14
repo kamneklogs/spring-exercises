@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 
 import co.edu.icesi.tintegracion.model.hr.Employee;
 import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
-import co.edu.icesi.tintegracion.model.hr.EmployeepayhistoryPK;
 import co.edu.icesi.tintegracion.repositories.EmployeePayHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeePayHistoryService;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @Service
 public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
 
@@ -25,23 +26,16 @@ public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
         this.employeeRepositoryInt = employeeRepositoryInt;
     }
 
-    public Employeepayhistory save(Integer employeeId, Employeepayhistory employeepayhistory,
-            EmployeepayhistoryPK employeepayhistoryPk) {
+    public Employeepayhistory save(Employeepayhistory employeepayhistory, Integer employeeId) {
 
         Optional<Employee> employee = employeeRepositoryInt.findById(employeeId);
 
-        if (!employee.isPresent()) {
-            throw new RuntimeException("Employee not found");
-        } else if (employeepayhistory == null) {
-            throw new RuntimeException("Employeepayhistory cannot be null");
-        } else if (employeepayhistory.getRate().compareTo(BigDecimal.ZERO) < 0) {
-            throw new RuntimeException("Rate is less than zero");
-        } else if (!(employeepayhistory.getPayfrequency() == 15) || !(employeepayhistory.getPayfrequency() == 30)) {
-            throw new RuntimeException("Payfrequency is invalid");
+        if (employee.isPresent()) {
+            employeepayhistory.setEmployee(employee.get());
         }
 
         employeepayhistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
-
+        log.info(employeepayhistory.getBusinessentityid() + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         return employeePayHistoryRepositoryInt.save(employeepayhistory);
     }
 
