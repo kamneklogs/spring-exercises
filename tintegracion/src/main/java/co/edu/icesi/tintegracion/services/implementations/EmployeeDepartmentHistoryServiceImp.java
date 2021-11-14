@@ -13,7 +13,7 @@ import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeDepartmentHistoryService;
 
 @Service
-public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHistoryService{
+public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHistoryService {
 
     private EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt;
     private EmployeeRepositoryInt employeeRepositoryInt;
@@ -84,5 +84,11 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
 
         employeedepartmenthistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
         return employeeDepartmentHistoryRepositoryInt.save(employeedepartmenthistory);
+    }
+
+    @Override
+    public Iterable<Employeedepartmenthistory> findAll() {
+
+        return employeeDepartmentHistoryRepositoryInt.findAll();
     }
 }
