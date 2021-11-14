@@ -7,4 +7,5 @@ public interface DepartmentService {
 
     public Department edit(Department department);
 
+    public Iterable<Department> findAll();
 }

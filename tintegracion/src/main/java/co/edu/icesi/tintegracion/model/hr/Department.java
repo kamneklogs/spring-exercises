@@ -12,6 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * The persistent class for the department database table.
  *
@@ -28,6 +30,7 @@ public class Department implements Serializable {
 
 	private String groupname;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp modifieddate;
 
 	private String name;
