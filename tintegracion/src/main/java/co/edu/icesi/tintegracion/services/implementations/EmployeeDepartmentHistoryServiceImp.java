@@ -3,11 +3,14 @@ package co.edu.icesi.tintegracion.services.implementations;
 import java.sql.Timestamp;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.edu.icesi.tintegracion.model.hr.Department;
 import co.edu.icesi.tintegracion.model.hr.Employee;
 import co.edu.icesi.tintegracion.model.hr.Employeedepartmenthistory;
 import co.edu.icesi.tintegracion.model.hr.Shift;
+import co.edu.icesi.tintegracion.repositories.DepartmentRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeDepartmentHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeDepartmentHistoryService;
@@ -17,41 +20,20 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
 
     private EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt;
     private EmployeeRepositoryInt employeeRepositoryInt;
+    private DepartmentRepositoryInt departmentRepositoryInt;
 
+    @Autowired
     public EmployeeDepartmentHistoryServiceImp(
             EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt,
-            EmployeeRepositoryInt employeeRepositoryInt) {
+            EmployeeRepositoryInt employeeRepositoryInt, DepartmentRepositoryInt departmentRepositoryInt) {
         this.employeeDepartmentHistoryRepositoryInt = employeeDepartmentHistoryRepositoryInt;
         this.employeeRepositoryInt = employeeRepositoryInt;
+        this.departmentRepositoryInt= departmentRepositoryInt;
     }
 
-    public Employeedepartmenthistory save(Employeedepartmenthistory employeedepartmenthistory, Integer employeeId) {
+    public Employeedepartmenthistory save(Employeedepartmenthistory employeedepartmenthistory, Integer departmentId) {
 
-        Optional<Employee> employee = employeeRepositoryInt.findById(employeeId);
-
-        if (!employee.isPresent()) {
-            throw new RuntimeException("Employee not found");
-        } else {
-            employeedepartmenthistory.setEmployee(employee.get());
-
-            Timestamp actualdate = new Timestamp(System.currentTimeMillis());
-
-            if (!actualdate.before(employeedepartmenthistory.getEnddate())) {
-                throw new RuntimeException("End date is not valid");
-            }
-
-        }
-
-        Shift shift = employeedepartmenthistory.getShift();
-
-        if (shift == null) {
-            throw new RuntimeException("Shift cannot be null");
-        } else if (shift.getName() == null) {
-            throw new RuntimeException("Shift name cannot be null");
-        } else if (employeedepartmenthistory.getDepartment() == null) {
-            throw new RuntimeException("Department cannot be null");
-        }
-
+        employeedepartmenthistory.setDepartment(departmentRepositoryInt.findById(departmentId).get());
         employeedepartmenthistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
         return employeeDepartmentHistoryRepositoryInt.save(employeedepartmenthistory);
     }

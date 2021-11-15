@@ -21,71 +21,83 @@
   </head>
   <body>
     <div class="container my-5">
-      <h2 class="mb-5">New employee</h2>
+      <h2 class="mb-5">New department history</h2>
       <div class="row">
         <div class="col-md-6">
           <form
             action="#"
-            th:action="@{/employees/addEmployee/}"
-            th:object="${employee}"
+            th:action="@{/departmentsHistory/addDepartmentHistory}"
+            th:object="${dHistory}"
             method="post"
           >
             <div class="row">
               <div class="form-group col-md-6">
-                <label for="firstname" class="col-form-label">Birth date</label>
+                <label for="startdate" class="col-form-label">Start date</label>
                 <input
                   type="date"
-                  th:field="*{birthdate}"
+                  th:field="*{startdate}"
                   class="form-control"
-                  id="birthdate"
-                  placeholder="Birth date"
-                />Hireddate</label>
+                  id="startdate"
+                  placeholder="startdate"
+                />End date</label>
                 <input
                   type="date"
-                  th:field="*{hiredate}"
+                  th:field="*{enddate}"
                   class="form-control"
-                  id="hiredate"
-                  placeholder="Hireddate"
+                  id="enddate"
+                  placeholder="enddate"
                 />
                 <span
-                  th:if="${#fields.hasErrors('hiredate')}"
-                  th:errors="*{hiredate}"
+                  th:if="${#fields.hasErrors('enddate')}"
+                  th:errors="*{enddate}"
                   class="text-danger"
                 ></span>
               </div>
              
+            <div class="row">
+                
+              
               <div class="form-group col-md-6">
-                <label for="jobtitle" class="col-form-label">Job title</label>
-                <input
-                  type="text"
-                  th:field="*{jobtitle}"
-                  class="form-control"
-                  id="jobtitle"
-                  placeholder="Job tittle"
-                />
+                <label for="department" class="col-form-label">Department name</label>
+                <select name="department" id="department" th:field="*{department}" class="form-control">
+                  <option
+                    th:each="dep : ${departments}"
+                    th:value="${dep.departmentid}"
+                    class="form-control"
+                    th:text="${dep.name}"
+                    th:selected="${dHistory.department==dep}"
+                  ></option>
+                </select>
                 <span
-                  th:if="${#fields.hasErrors('jobtitle')}"
-                  th:errors="*{jobtitle}"
+                  th:if="${#fields.hasErrors('department')}"
+                  th:errors="*{department}"
                   class="text-danger"
                 ></span>
               </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="person" class="col-form-label">Person</label>
-              <select th:field="*{businessentityid}">
-                <option
-                  th:each="person : ${people}"
-                  th:value="${person.businessentityid}"
-                  class="form-control"
-                  th:text="${person.firstname}"
-                  th:selected="${employee.businessentityid=person.businessentityid}"
-                ></option>
-              </select>
-              <span
-                th:if="${#fields.hasErrors('businessentityid')}"
-                th:errors="*{businessentityid}"
-                class="text-danger"
-              ></span>
+              <div class="form-group col-md-6">
+                <label for="employee" class="col-form-label">Employee id</label>
+                <select th:field="*{employee}" class="form-control">
+                  <option
+                    th:each="emp : ${employees}"
+                    th:value="${emp.businessentityid}"
+                    class="form-control"
+                    th:text="${emp.businessentityid}"
+                    th:selected="${dHistory.employee==emp}"
+                  ></option>
+                </select>
+                <span
+                  th:if="${#fields.hasErrors('employee')}"
+                  th:errors="*{employee}"
+                  class="text-danger"
+                ></span>
+              </div>
+            
+            </div>  
+
+
+
+
+
             </div>
             <div class="row">
               <div class="col-md-4 mt-3">

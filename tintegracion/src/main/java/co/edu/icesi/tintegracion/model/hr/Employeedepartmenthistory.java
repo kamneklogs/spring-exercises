@@ -17,6 +17,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * The persistent class for the employeedepartmenthistory database table.
  *
@@ -27,17 +29,17 @@ public class Employeedepartmenthistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "Employeedepartmenthistory_BUSINESSENTITYID_GENERATOR", allocationSize = 1, sequenceName = "Employeedepartmenthistory_SEQ")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Employeedepartmenthistory_BUSINESSENTITYID_GENERATOR")
 	private Integer businessentityid;
 
 	@Column(insertable = false, updatable = false)
 	private Integer departmentid;
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private java.util.Date startdate;
-	
+
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date enddate;
 
 	private Timestamp modifieddate;
@@ -62,6 +64,30 @@ public class Employeedepartmenthistory implements Serializable {
 
 	public Department getDepartment() {
 		return this.department;
+	}
+
+	public Integer getBusinessentityid() {
+		return businessentityid;
+	}
+
+	public void setBusinessentityid(Integer businessentityid) {
+		this.businessentityid = businessentityid;
+	}
+
+	public Integer getDepartmentid() {
+		return departmentid;
+	}
+
+	public void setDepartmentid(Integer departmentid) {
+		this.departmentid = departmentid;
+	}
+
+	public java.util.Date getStartdate() {
+		return startdate;
+	}
+
+	public void setStartdate(java.util.Date startdate) {
+		this.startdate = startdate;
 	}
 
 	public Employee getEmployee() {
