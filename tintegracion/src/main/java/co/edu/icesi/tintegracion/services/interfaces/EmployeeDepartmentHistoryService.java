@@ -5,7 +5,7 @@ import co.edu.icesi.tintegracion.model.hr.Employeedepartmenthistory;
 
 public interface EmployeeDepartmentHistoryService {
 
-    public Employeedepartmenthistory save(Employeedepartmenthistory employeedepartmenthistory, Integer departmentId);
+    public Employeedepartmenthistory save(Employeedepartmenthistory employeedepartmenthistory);
     public Iterable<Employeedepartmenthistory> findAll();
     public Employeedepartmenthistory edit(Employeedepartmenthistory employeedepartmenthistory, Integer employeeId);
 }

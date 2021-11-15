@@ -52,12 +52,9 @@ public class DepartmentsHistoryController {
     public String addDepartmentsHistory(Model model, Employeedepartmenthistory dHistory,
             @RequestParam(value = "action", required = true) String action) {
         if (!action.equals("cancel")) {
-            dHistory
-                    .setBusinessentityid(dHistory.getEmployee().getBusinessentityid());
-            dHistory.setDepartment(dHistory.getDepartment());
-            employeeDepartmentHistoryService.save(dHistory, dHistory.getDepartment().getDepartmentid());
+            dHistory.setBusinessentityid(dHistory.getEmployee().getBusinessentityid());
+            employeeDepartmentHistoryService.save(dHistory);
 
-            log.info(dHistory.getDepartment().getName() + "  Holiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
         }
         return "redirect:/departmentsHistory/";
     }

@@ -28,12 +28,11 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
             EmployeeRepositoryInt employeeRepositoryInt, DepartmentRepositoryInt departmentRepositoryInt) {
         this.employeeDepartmentHistoryRepositoryInt = employeeDepartmentHistoryRepositoryInt;
         this.employeeRepositoryInt = employeeRepositoryInt;
-        this.departmentRepositoryInt= departmentRepositoryInt;
+        this.departmentRepositoryInt = departmentRepositoryInt;
     }
 
-    public Employeedepartmenthistory save(Employeedepartmenthistory employeedepartmenthistory, Integer departmentId) {
+    public Employeedepartmenthistory save(Employeedepartmenthistory employeedepartmenthistory) {
 
-        employeedepartmenthistory.setDepartment(departmentRepositoryInt.findById(departmentId).get());
         employeedepartmenthistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
         return employeeDepartmentHistoryRepositoryInt.save(employeedepartmenthistory);
     }

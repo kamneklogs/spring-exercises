@@ -44,6 +44,10 @@ public class Employeedepartmenthistory implements Serializable {
 
 	private Timestamp modifieddate;
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	// bi-directional many-to-one association to Department
 	@ManyToOne
 	@JoinColumn(name = "departmentid", insertable = false, updatable = false)
