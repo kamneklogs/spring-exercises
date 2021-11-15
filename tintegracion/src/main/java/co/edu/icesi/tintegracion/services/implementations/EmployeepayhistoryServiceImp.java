@@ -28,14 +28,10 @@ public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
 
     public Employeepayhistory save(Employeepayhistory employeepayhistory, Integer employeeId) {
 
-        Optional<Employee> employee = employeeRepositoryInt.findById(employeeId);
-
-        if (employee.isPresent()) {
-            employeepayhistory.setEmployee(employee.get());
-        }
+       
 
         employeepayhistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
-        log.info(employeepayhistory.getBusinessentityid() + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+       
         return employeePayHistoryRepositoryInt.save(employeepayhistory);
     }
 

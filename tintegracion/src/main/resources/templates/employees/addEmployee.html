@@ -39,17 +39,10 @@
                   class="form-control"
                   id="birthdate"
                   placeholder="Birth date"
-                />Hireddate</label>
-                <input
-                  type="date"
-                  th:field="*{hiredate}"
-                  class="form-control"
-                  id="hiredate"
-                  placeholder="Hireddate"
                 />
                 <span
-                  th:if="${#fields.hasErrors('hiredate')}"
-                  th:errors="*{hiredate}"
+                  th:if="${#fields.hasErrors('birthdate')}"
+                  th:errors="*{birthdate}"
                   class="text-danger"
                 ></span>
               </div>

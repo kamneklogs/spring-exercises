@@ -11,6 +11,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,9 +27,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@Id
 	private Integer businessentityid;
 
+	@Past
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthdate;
@@ -35,10 +41,13 @@ public class Employee implements Serializable {
 
 	private String gender;
 
+	@Past
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date hiredate;
 
+	@NotBlank
+	@NotNull
 	private String jobtitle;
 
 	private String loginid;

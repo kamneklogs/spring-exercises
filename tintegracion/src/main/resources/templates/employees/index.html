@@ -34,7 +34,6 @@
                   <th>Hireddate</th>
                   <th>Job title</th>
                   <th>Edit</th>
-                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -49,22 +48,12 @@
 
                   <td class="text-info" th:text="${employee.jobtitle}"></td>
 
-
-                  
                   <td>
                     <a
                       th:href="@{/employees/edit/{id}(id=${employee.businessentityid})}"
                       class="btn btn-primary"
                     >
                       <i class="fas fa-user-edit ml-2"></i>
-                    </a>
-                  </td>
-                  <td>
-                    <a
-                      th:href="@{/employees/del/{id}(id=${employee.businessentityid})}"
-                      class="btn btn-primary"
-                    >
-                      <i class="fas fa-user-times ml-2"></i>
                     </a>
                   </td>
                 </tr>

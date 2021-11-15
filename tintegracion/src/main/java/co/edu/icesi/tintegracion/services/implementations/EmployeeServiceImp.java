@@ -1,5 +1,6 @@
 package co.edu.icesi.tintegracion.services.implementations;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -33,6 +34,7 @@ public class EmployeeServiceImp implements EmployeeService {
     public Employee save(Employee employee) {
 
         log.info(employee.getBusinessentityid() + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        employee.setHiredate(new Date());
         return employeeRepositoryInt.save(employee);
     }
 

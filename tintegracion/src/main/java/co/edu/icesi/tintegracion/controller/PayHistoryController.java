@@ -3,7 +3,10 @@ package co.edu.icesi.tintegracion.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,12 +19,12 @@ import co.edu.icesi.tintegracion.services.interfaces.PersonService;
 public class PayHistoryController {
 
     private EmployeePayHistoryService employeePayHistoryService;
-    private PersonService personService;
+    private EmployeeService employeeService;
 
     @Autowired
-    public PayHistoryController(EmployeePayHistoryService employeePayHistoryService, PersonService personService) {
+    public PayHistoryController(EmployeePayHistoryService employeePayHistoryService, EmployeeService employeeService) {
         this.employeePayHistoryService = employeePayHistoryService;
-        this.personService = personService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/payment/")
@@ -34,16 +37,20 @@ public class PayHistoryController {
     public String addEmployeepayhistory(Model model) {
 
         model.addAttribute("employeepayhistory", new Employeepayhistory());
-        model.addAttribute("people", personService.findAll());
+        model.addAttribute("employees", employeeService.findAll());
 
         return "/payment/addPayhistory";
     }
 
     @PostMapping("/payment/addEmployeepayhistory")
-    public String addEmployeepayhistory(Employeepayhistory employeepayhistory, Model model,
-            @RequestParam(value = "action", required = true) String action) {
+    public String addEmployeepayhistory(@Validated @ModelAttribute Employeepayhistory employeepayhistory,
+            BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
         if (!action.equals("cancel")) {
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("people", employeeService.findAll());
 
+                return "payment/addEmployeepayhistory";
+            }
             employeePayHistoryService.save(employeepayhistory, employeepayhistory.getBusinessentityid());
         }
         return "redirect:/payment/";

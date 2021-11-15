@@ -5,7 +5,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,10 +40,18 @@ public class PeopleController {
     }
 
     @PostMapping("/people/addPerson")
-    public String addPerson(Person person, Model model,
+    public String addPerson(@Validated @ModelAttribute Person person, BindingResult bindingResult, Model model,
             @RequestParam(value = "action", required = true) String action) {
+
         if (!action.equals("cancel"))
-            personService.save(person);
+
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("person", person);
+
+                return "/people/addPerson";
+            }
+
+        personService.save(person);
         return "redirect:/people/";
     }
 

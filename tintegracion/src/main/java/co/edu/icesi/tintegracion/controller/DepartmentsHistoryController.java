@@ -3,7 +3,10 @@ package co.edu.icesi.tintegracion.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,14 +47,22 @@ public class DepartmentsHistoryController {
     public String addDepartmentsHistory(Model model) {
         model.addAttribute("dHistory", new Employeedepartmenthistory());
         model.addAttribute("employees", employeeService.findAll());
-        model.addAttribute("departments", departmentService.findAll());
         return "department-history/addDepartmentH";
     }
 
     @PostMapping("/departmentsHistory/addDepartmentHistory")
-    public String addDepartmentsHistory(Model model, Employeedepartmenthistory dHistory,
-            @RequestParam(value = "action", required = true) String action) {
-        if (!action.equals("cancel")) {
+    public String addDepartmentsHistory(@Validated @ModelAttribute Employeedepartmenthistory dHistory,
+            BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
+
+        if (!action.equals("Cancel")) {
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("dHistory", dHistory);
+                model.addAttribute("employees", employeeService.findAll());
+                log.info(bindingResult.getFieldErrors().get(0).getDefaultMessage()
+                        + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+                return "department-history/addDepartmentH";
+            }
             dHistory.setBusinessentityid(dHistory.getEmployee().getBusinessentityid());
             employeeDepartmentHistoryService.save(dHistory);
 

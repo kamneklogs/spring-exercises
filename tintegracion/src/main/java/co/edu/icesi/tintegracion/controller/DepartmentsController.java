@@ -3,7 +3,10 @@ package co.edu.icesi.tintegracion.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,9 +37,14 @@ public class DepartmentsController {
     }
 
     @PostMapping("/departments/addDepartment")
-    public String addEmployeepayhistory(Department department, Model model,
-            @RequestParam(value = "action", required = true) String action) {
+    public String addEmployeepayhistory(@Validated @ModelAttribute Department department, BindingResult bindingResult,
+            Model model, @RequestParam(value = "action", required = true) String action) {
         if (!action.equals("cancel")) {
+
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("department", department);
+                return "departments/addDepartment";
+            }
 
             departmentService.save(department);
         }

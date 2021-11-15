@@ -1,5 +1,7 @@
 package co.edu.icesi.tintegracion;
 
+import java.util.Date;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -71,6 +73,9 @@ public class TintegracionApplication {
 		Employee employee1 = new Employee();
 
 		employee1.setBusinessentityid(person.getBusinessentityid());
+		employee1.setJobtitle("Supervisor");
+		employee1.setBirthdate(new Date());
+
 		employeeService.save(employee1);
 
 
@@ -78,19 +83,23 @@ public class TintegracionApplication {
 		Employee employee2 = new Employee();
 
 		employee2.setBusinessentityid(person2.getBusinessentityid());
+		employee2.setJobtitle("Asistente");
+		employee2.setBirthdate(new Date());
 		employeeService.save(employee2);
 
 
 		Department department = new Department();
 
-		department.setName("Dep1");
+		department.setName("QA");
+		department.setGroupname("TI / Services");
 
 		departmentService.save(department);
 
 
 		Department department2 = new Department();
 
-		department2.setName("Dep2");
+		department2.setName("Contable");
+		department2.setGroupname("Admin");
 
 		departmentService.save(department2);
 	}

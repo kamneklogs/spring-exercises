@@ -22,7 +22,7 @@
 
   <body>
     <div class="container my-5">
-      <h2 class="mb-5">New employee</h2>
+      <h2 class="mb-5">New payment</h2>
       <div class="row">
         <div class="col-md-6">
           <form
@@ -60,11 +60,12 @@
                 <label for="Person" class="col-form-label">Person</label>
                 <select th:field="*{businessentityid}" class="form-control">
                   <option
-                    th:each="person : ${people}"
-                    th:value="${person.businessentityid}"
+                    th:each="emp : ${employees}"
+                    th:value="${emp.businessentityid}"
                     class="form-control"
-                    th:text="${person.firstname}"
-                  ></option>
+                    th:text="${emp.businessentityid}"
+                    th:selected="${employeepayhistory.employee==emp}"
+                    ></option>
                 </select>
               </div>
               <div class="row">

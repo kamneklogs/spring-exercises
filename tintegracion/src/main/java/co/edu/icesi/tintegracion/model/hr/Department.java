@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,11 +30,15 @@ public class Department implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DEPARTMENT_DEPARTMENTID_GENERATOR")
 	private Integer departmentid;
 
+	@NotBlank
+	@NotNull
 	private String groupname;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Timestamp modifieddate;
 
+	@NotBlank
+	@NotNull
 	private String name;
 
 	// bi-directional many-to-one association to Employeedepartmenthistory

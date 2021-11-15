@@ -16,13 +16,17 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.extern.log4j.Log4j2;
 
 /**
  * The persistent class for the employeedepartmenthistory database table.
  *
  */
+@Log4j2
 @Entity
 @NamedQuery(name = "Employeedepartmenthistory.findAll", query = "SELECT e FROM Employeedepartmenthistory e")
 public class Employeedepartmenthistory implements Serializable {
@@ -34,10 +38,12 @@ public class Employeedepartmenthistory implements Serializable {
 	@Column(insertable = false, updatable = false)
 	private Integer departmentid;
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private java.util.Date startdate;
+	private Date startdate;
 
+	@NotNull(message = "Debe ser despues de la fecha de inicio")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date enddate;
@@ -119,6 +125,7 @@ public class Employeedepartmenthistory implements Serializable {
 	}
 
 	public void setEnddate(Date enddate) {
+
 		this.enddate = enddate;
 	}
 
