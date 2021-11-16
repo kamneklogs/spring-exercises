@@ -48,7 +48,7 @@ public class PayHistoryController {
     @PostMapping("/payment/addEmployeepayhistory")
     public String addEmployeepayhistory(@Validated @ModelAttribute Employeepayhistory employeepayhistory,
             BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
-        if (!action.equals("cancel")) {
+        if (!action.equals("Cancel")) {
             if (bindingResult.hasErrors()) {
                 model.addAttribute("people", employeeService.findAll());
 
@@ -83,6 +83,13 @@ public class PayHistoryController {
             employeePayHistoryService.save(pHistory, pHistory.getBusinessentityid());
         }
         return "redirect:/payment/";
+    }
+
+
+    @GetMapping("/payment/showDetails/{id}")
+    public String showDetails(@PathVariable("id") int id, Model model) {
+        model.addAttribute("pHistory", employeePayHistoryService.findById(id));
+        return "payment/show-details";
     }
 
 }

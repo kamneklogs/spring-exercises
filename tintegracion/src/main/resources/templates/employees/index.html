@@ -33,6 +33,7 @@
                   <th>birthdate</th>
                   <th>Hireddate</th>
                   <th>Job title</th>
+                  <th>Details</th>
                   <th>Edit</th>
                 </tr>
               </thead>
@@ -48,6 +49,14 @@
 
                   <td class="text-info" th:text="${employee.jobtitle}"></td>
 
+                  <td>
+                    <a
+                      th:href="@{/employees/showDetails/{id}(id=${employee.businessentityid})}"
+                      class="btn btn-primary"
+                    >
+                      <i class="far fa-eye"></i>
+                    </a>
+                  </td>
                   <td>
                     <a
                       th:href="@{/employees/edit/{id}(id=${employee.businessentityid})}"

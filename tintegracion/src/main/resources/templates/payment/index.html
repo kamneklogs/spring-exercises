@@ -34,6 +34,7 @@
                   <th>Modified date</th>
                   <th>Pay frequency (days)</th>
                   <th>Rate $</th>
+                  <th>Details</th>
                   <th>Edit</th>
                 </tr>
               </thead>
@@ -62,13 +63,20 @@
 
                   <td>
                     <a
+                      th:href="@{/payment/showDetails/{id}(id=${payHistory.businessentityid})}"
+                      class="btn btn-primary"
+                    >
+                      <i class="far fa-eye"></i>
+                    </a>
+                  </td>
+                  <td>
+                    <a
                       th:href="@{/payment/edit/{id}(id=${payHistory.businessentityid})}"
                       class="btn btn-primary"
                     >
                       <i class="fas fa-user-edit ml-2"></i>
                     </a>
                   </td>
-                  
                 </tr>
               </tbody>
             </table>

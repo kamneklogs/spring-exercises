@@ -70,7 +70,6 @@ public class PeopleController {
             Person person, Model model) {
         if (action != null && !action.equals("Cancel")) {
             personService.save(person);
-            model.addAttribute("users", personService.findAll());
         }
         return "redirect:/people/";
     }

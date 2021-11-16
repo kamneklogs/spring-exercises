@@ -82,4 +82,10 @@ public class EmployeesController {
         }
         return "redirect:/employees/";
     }
+
+    @GetMapping("/employees/showDetails/{id}")
+    public String showDetails(@PathVariable("id") int id, Model model) {
+        model.addAttribute("employee", employeeService.findById(id).get());
+        return "employees/show-details";
+    }
 }
