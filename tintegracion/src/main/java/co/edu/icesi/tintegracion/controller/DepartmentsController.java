@@ -79,4 +79,10 @@ public class DepartmentsController {
         return "redirect:/departments/";
     }
 
+
+    @GetMapping("/departments/showDetails/{id}")
+    public String showDetails(@PathVariable("id") int id, Model model) {
+        model.addAttribute("department", departmentService.findById(id));
+        return "departments/show-details";
+    }
 }

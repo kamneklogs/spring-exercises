@@ -84,8 +84,9 @@ public class DepartmentsHistoryController {
     }
 
     @PostMapping("/departmentsHistory/edit/{id}")
-    public String updateDepartmentH(@Validated @ModelAttribute Employeedepartmenthistory dHistory, BindingResult bindingResult,
-            Model model, @PathVariable("id") int id, @RequestParam(value = "action", required = true) String action) {
+    public String updateDepartmentH(@Validated @ModelAttribute Employeedepartmenthistory dHistory,
+            BindingResult bindingResult, Model model, @PathVariable("id") int id,
+            @RequestParam(value = "action", required = true) String action) {
         if (action != null && !action.equals("Cancel")) {
 
             if (bindingResult.hasErrors()) {
@@ -96,5 +97,11 @@ public class DepartmentsHistoryController {
             employeeDepartmentHistoryService.save(dHistory);
         }
         return "redirect:/departmentsHistory/";
+    }
+
+    @GetMapping("/departmentsHistory/showDetails/{id}")
+    public String showDetails(@PathVariable("id") int id, Model model) {
+        model.addAttribute("dHistory", employeeDepartmentHistoryService.findById(id).get());
+        return "department-history/show-details";
     }
 }
