@@ -2,7 +2,6 @@ package co.edu.icesi.tintegracion.services.interfaces;
 
 import java.util.Optional;
 
-import co.edu.icesi.tintegracion.model.hr.Department;
 import co.edu.icesi.tintegracion.model.hr.Employeedepartmenthistory;
 
 public interface EmployeeDepartmentHistoryService {

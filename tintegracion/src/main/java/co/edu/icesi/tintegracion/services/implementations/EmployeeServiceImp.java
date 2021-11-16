@@ -12,9 +12,7 @@ import co.edu.icesi.tintegracion.repositories.BussinesEntityRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.PersonRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeService;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Service
 public class EmployeeServiceImp implements EmployeeService {
 
@@ -33,7 +31,6 @@ public class EmployeeServiceImp implements EmployeeService {
 
     public Employee save(Employee employee) {
 
-        log.info(employee.getBusinessentityid() + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         employee.setHiredate(new Date());
         return employeeRepositoryInt.save(employee);
     }

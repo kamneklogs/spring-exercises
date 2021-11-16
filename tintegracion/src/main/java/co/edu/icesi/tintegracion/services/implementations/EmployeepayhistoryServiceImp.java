@@ -11,9 +11,7 @@ import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
 import co.edu.icesi.tintegracion.repositories.EmployeePayHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeePayHistoryService;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Service
 public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
 

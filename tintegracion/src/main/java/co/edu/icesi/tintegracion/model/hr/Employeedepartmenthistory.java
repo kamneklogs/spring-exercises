@@ -5,28 +5,22 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.extern.log4j.Log4j2;
-
 /**
  * The persistent class for the employeedepartmenthistory database table.
  *
  */
-@Log4j2
+
 @Entity
 @NamedQuery(name = "Employeedepartmenthistory.findAll", query = "SELECT e FROM Employeedepartmenthistory e")
 public class Employeedepartmenthistory implements Serializable {

@@ -6,11 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.edu.icesi.tintegracion.model.hr.Department;
 import co.edu.icesi.tintegracion.model.hr.Employee;
 import co.edu.icesi.tintegracion.model.hr.Employeedepartmenthistory;
 import co.edu.icesi.tintegracion.model.hr.Shift;
-import co.edu.icesi.tintegracion.repositories.DepartmentRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeDepartmentHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeDepartmentHistoryService;
@@ -20,15 +18,13 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
 
     private EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt;
     private EmployeeRepositoryInt employeeRepositoryInt;
-    private DepartmentRepositoryInt departmentRepositoryInt;
 
     @Autowired
     public EmployeeDepartmentHistoryServiceImp(
             EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt,
-            EmployeeRepositoryInt employeeRepositoryInt, DepartmentRepositoryInt departmentRepositoryInt) {
+            EmployeeRepositoryInt employeeRepositoryInt) {
         this.employeeDepartmentHistoryRepositoryInt = employeeDepartmentHistoryRepositoryInt;
         this.employeeRepositoryInt = employeeRepositoryInt;
-        this.departmentRepositoryInt = departmentRepositoryInt;
     }
 
     public Employeedepartmenthistory save(Employeedepartmenthistory employeedepartmenthistory) {
@@ -75,7 +71,7 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
 
     @Override
     public Optional<Employeedepartmenthistory> findById(Integer id) {
-        
+
         return employeeDepartmentHistoryRepositoryInt.findById(id);
     }
 }

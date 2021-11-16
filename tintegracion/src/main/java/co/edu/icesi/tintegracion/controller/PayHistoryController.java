@@ -1,7 +1,5 @@
 package co.edu.icesi.tintegracion.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeePayHistoryService;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeService;
-import co.edu.icesi.tintegracion.services.interfaces.PersonService;
 
 @Controller
 public class PayHistoryController {
@@ -84,7 +81,6 @@ public class PayHistoryController {
         }
         return "redirect:/payment/";
     }
-
 
     @GetMapping("/payment/showDetails/{id}")
     public String showDetails(@PathVariable("id") int id, Model model) {
