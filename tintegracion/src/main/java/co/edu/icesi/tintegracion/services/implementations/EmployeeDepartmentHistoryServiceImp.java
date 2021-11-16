@@ -72,4 +72,10 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
 
         return employeeDepartmentHistoryRepositoryInt.findAll();
     }
+
+    @Override
+    public Optional<Employeedepartmenthistory> findById(Integer id) {
+        
+        return employeeDepartmentHistoryRepositoryInt.findById(id);
+    }
 }

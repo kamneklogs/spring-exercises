@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import co.edu.icesi.tintegracion.model.hr.Employeedepartmenthistory;
 import co.edu.icesi.tintegracion.model.hr.EmployeedepartmenthistoryPK;
 
-public interface EmployeeDepartmentHistoryRepositoryInt extends CrudRepository<Employeedepartmenthistory, EmployeedepartmenthistoryPK> {
+public interface EmployeeDepartmentHistoryRepositoryInt extends CrudRepository<Employeedepartmenthistory, Integer> {
 
 }

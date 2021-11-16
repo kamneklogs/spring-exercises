@@ -74,4 +74,11 @@ public class PeopleController {
         }
         return "redirect:/people/";
     }
+
+    @GetMapping("/people/showDetails/{id}")
+    public String showDetails(@PathVariable("id") int id, Model model) {
+
+        model.addAttribute("person", personService.findById(id));
+        return "people/show-details";
+    }
 }

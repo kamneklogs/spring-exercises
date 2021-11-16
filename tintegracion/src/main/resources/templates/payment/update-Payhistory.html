@@ -27,11 +27,21 @@
         <div class="col-md-6">
           <form
             action="#"
-            th:action="@{/payment/addEmployeepayhistory/}"
-            th:object="${employeepayhistory}"
+            th:action="@{/payment/edit/{id}(id=${pHistory.businessentityid})}"
+            th:object="${pHistory}"
             method="post"
           >
             <div class="row">
+              <div class="form-group col-md-6">
+                <label for="businessentityid" class="col-form-label">Id</label>
+                <input
+                  type="text"
+                  th:field="*{businessentityid}"
+                  class="form-control"
+                  id="businessentityid"
+                  readonly
+                />
+              </div>
               <div class="form-group col-md-6">
                 <label for="rate" class="col-form-label">Rate</label>
                 <input
@@ -53,18 +63,18 @@
                   class="form-control"
                 >
                   <option value="15">15</option>
-                  <option value="15">30</option>
+                  <option value="30">30</option>
                 </select>
               </div>
               <div class="form-group col-md-6">
-                <label for="Person" class="col-form-label">Person</label>
-                <select th:field="*{businessentityid}" class="form-control">
+                <label for="Person" class="col-form-label">Person id</label>
+                <select th:field="*{businessentityid}" class="form-control" >
                   <option
-                    th:each="emp : ${employees}"
-                    th:value="${emp.businessentityid}"
+                    th:value="${pHistory.businessentityid}"
                     class="form-control"
-                    th:text="${emp.businessentityid}"
-                    th:selected="${employeepayhistory.employee==emp}"
+                    th:text="${pHistory.businessentityid}"
+                    th:selected="${pHistory.employee==emp}"
+                    
                     ></option>
                 </select>
               </div>

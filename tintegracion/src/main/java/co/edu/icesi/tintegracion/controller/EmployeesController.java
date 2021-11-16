@@ -1,5 +1,7 @@
 package co.edu.icesi.tintegracion.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,15 +46,40 @@ public class EmployeesController {
     public String addEmployee(@Validated @ModelAttribute Employee employee, BindingResult bindingResult, Model model,
             @RequestParam(value = "action", required = true) String action) {
 
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("employee", employee);
-            model.addAttribute("people", personService.findAll());
-            return "employees/addEmployee";
-        }
-
-        if (!action.equals("cancel"))
+        if (!action.equals("Cancel")) {
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("employee", employee);
+                model.addAttribute("people", personService.findAll());
+                return "employees/addEmployee";
+            }
             employeeService.save(employee);
+        }
+        return "redirect:/employees/";
+    }
 
+    @GetMapping("/employees/edit/{id}")
+    public String showUpdateForm(@PathVariable("id") int id, Model model) {
+        Optional<Employee> employee = employeeService.findById(id);
+        if (employee == null)
+            throw new IllegalArgumentException("Invalid person Id:" + id);
+        model.addAttribute("people", personService.findAll());
+        model.addAttribute("employee", employee.get());
+
+        return "employees/update-employee";
+    }
+
+    @PostMapping("/employees/edit/{id}")
+    public String updateEmployee(@Validated @ModelAttribute Employee employee, BindingResult bindingResult, Model model,
+            @PathVariable("id") int id, @RequestParam(value = "action", required = true) String action) {
+        if (action != null && !action.equals("Cancel")) {
+
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("employee", employee);
+                model.addAttribute("people", personService.findAll());
+                return "employees/edit/" + employee.getBusinessentityid();
+            }
+            employeeService.save(employee);
+        }
         return "redirect:/employees/";
     }
 }

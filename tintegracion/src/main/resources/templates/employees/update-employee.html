@@ -3,34 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Add User</title>
+    <title>Update User</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-      crossorigin="anonymous"
     />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-      integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-      crossorigin="anonymous"
     />
     <link rel="stylesheet" href="../css/shards.min.css" />
   </head>
   <body>
-    <div class="container my-5">
-      <h2 class="mb-5">New employee</h2>
+    <div class="container my-1">
+      <h2 class="mb-5">Update employee</h2>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
           <form
             action="#"
-            th:action="@{/employees/addEmployee/}"
             th:object="${employee}"
+            th:action="@{/employees/edit/{id}(id=${employee.businessentityid})}"
             method="post"
           >
             <div class="row">
+              <div class="form-group col-md-6">
+                <label for="businessentityid" class="col-form-label">Id</label>
+                <input
+                  type="text"
+                  th:field="*{businessentityid}"
+                  class="form-control"
+                  id="businessentityid"
+                  readonly
+                />
+              </div>
+
               <div class="form-group col-md-6">
                 <label for="birthdate" class="col-form-label">Birth date</label>
                 <input
@@ -46,7 +53,6 @@
                   class="text-danger"
                 ></span>
               </div>
-
               <div class="form-group col-md-6">
                 <label for="jobtitle" class="col-form-label">Job title</label>
                 <input
@@ -62,23 +68,24 @@
                   class="text-danger"
                 ></span>
               </div>
-            </div>
-            <div class="form-group col-md-6">
-              <label for="person" class="col-form-label">Person</label>
-              <select th:field="*{businessentityid}" class="form-control">
-                <option
-                  th:each="person : ${people}"
-                  th:value="${person.businessentityid}"
-                  class="form-control"
-                  th:text="${person.firstname}"
-                  th:selected="${employee.businessentityid=person.businessentityid}"
-                ></option>
-              </select>
-              <span
-                th:if="${#fields.hasErrors('businessentityid')}"
-                th:errors="*{businessentityid}"
-                class="text-danger"
-              ></span>
+
+              <div class="form-group col-md-6">
+                <label for="person" class="col-form-label">Person</label>
+                <select th:field="*{businessentityid}" class="form-control">
+                  <option
+                    th:each="person : ${people}"
+                    th:value="${person.businessentityid}"
+                    class="form-control"
+                    th:text="${person.firstname}"
+                    th:selected="${employee.businessentityid=person.businessentityid}"
+                  ></option>
+                </select>
+                <span
+                  th:if="${#fields.hasErrors('businessentityid')}"
+                  th:errors="*{businessentityid}"
+                  class="text-danger"
+                ></span>
+              </div>
             </div>
             <div class="row">
               <div class="col-md-4 mt-3">
@@ -86,7 +93,7 @@
                   type="submit"
                   name="action"
                   class="btn btn-primary"
-                  value="Continue"
+                  value="Update User"
                 />
               </div>
               <div class="col-md-3 mt-3">
