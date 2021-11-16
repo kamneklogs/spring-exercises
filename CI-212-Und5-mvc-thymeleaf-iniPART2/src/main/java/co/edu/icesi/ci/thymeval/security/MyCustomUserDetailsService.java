@@ -12,10 +12,8 @@ import org.springframework.stereotype.Service;
 
 import co.edu.icesi.ci.thymeval.model.UserApp;
 import co.edu.icesi.ci.thymeval.repository.UserRepository;
-import jdk.internal.jline.internal.Log;
 import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Service
 public class MyCustomUserDetailsService implements UserDetailsService {
 
@@ -29,7 +27,7 @@ public class MyCustomUserDetailsService implements UserDetailsService {
 
 		if (userApp != null) {
 
-			User.UserBuilder builder = User.withUsername(username).password(userApp.getPassword()).roles("");
+			User.UserBuilder builder = User.withUsername(username).password(userApp.getPassword()).roles(userApp.getType().toString());
 
 			return builder.build();
 		} else {

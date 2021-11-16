@@ -19,9 +19,7 @@ import co.edu.icesi.ci.thymeval.model.CredentialsInfoValidation;
 import co.edu.icesi.ci.thymeval.model.PersonalInfoValidation;
 import co.edu.icesi.ci.thymeval.model.UserApp;
 import co.edu.icesi.ci.thymeval.service.UserServiceImpl;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 @Controller
 public class UserControllerImpl implements UserController {
 
@@ -45,6 +43,11 @@ public class UserControllerImpl implements UserController {
 		return "/login";
 	}
 
+//	@PostMapping("/login")
+//	public String login(Model model) {
+//		
+//		return ("users/index");
+//	}
 	@GetMapping("/logout")
 	public String logout(Model model) {
 		return "/login";

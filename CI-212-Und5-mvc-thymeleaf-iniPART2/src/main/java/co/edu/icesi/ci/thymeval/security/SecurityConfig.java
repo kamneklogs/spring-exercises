@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import co.edu.icesi.ci.thymeval.model.UserType;
+
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -37,8 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-		httpSecurity.authorizeRequests().antMatchers("/secure/**").authenticated().anyRequest().permitAll().and()
-				.formLogin().loginPage("/login");
+//		httpSecurity.authorizeRequests().antMatchers("/secure/**").authenticated().anyRequest().authenticated().and()
+//				.formLogin().loginPage("/login").permitAll().and().authorizeRequests().antMatchers("/users/**").hasRole(UserType.ADMIN.toString()).anyRequest().authenticated();
 		/*
 		 * .and().logout().invalidateHttpSession(true).clearAuthentication(true)
 		 * .logoutRequestMatcher(new
@@ -46,5 +48,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		 * .permitAll().and().exceptionHandling().accessDeniedHandler(
 		 * accessDeniedHandler)
 		 */
+		
+		httpSecurity//.userDetailsService(myCustomUserDetailsService)
+		// se deshabilita para que funcionen las peticiones a los rest controllers, es mala practica deshabilitarlo, corregirlo de otra manera
+//		.authorizeRequests().anyRequest().authenticated().and()
+		.formLogin()
+		.loginPage("/login").permitAll()
+		.and().authorizeRequests()
+		.antMatchers("/users/**")
+		.hasRole(UserType.ADMIN.toString()).antMatchers("/apps/**").hasRole(UserType.doctor.toString()).anyRequest().authenticated().and()
+		.httpBasic().and().logout().invalidateHttpSession(true)
+		.clearAuthentication(true)
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/login?logout").permitAll().and().exceptionHandling()
+		.accessDeniedHandler(accessDeniedHandler);
 	}
 }

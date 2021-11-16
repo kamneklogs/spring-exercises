@@ -37,6 +37,16 @@ public class ThymeleafValidationApplication {
 
 		u.save(user1);
 
+		UserApp user2 = new UserApp();
+		user2.setName("Juan Gomez");
+		user2.setUsername("andrea");
+		user2.setPassword("{noop}password2");
+		user2.setEmail("juanG11@gmail.com");
+		user2.setType(UserType.ADMIN);
+		user2.setGender(UserGender.masculine);
+		user2.setBirthDate(LocalDate.of(2000, 11, 18));
+
+		u.save(user2);
 	}
 
 }
