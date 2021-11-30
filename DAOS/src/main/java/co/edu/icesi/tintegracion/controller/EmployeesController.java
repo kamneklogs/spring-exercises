@@ -59,11 +59,11 @@ public class EmployeesController {
 
     @GetMapping("/employees/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        Optional<Employee> employee = employeeService.findById(id);
+        Employee employee = employeeService.findById(id);
         if (employee == null)
             throw new IllegalArgumentException("Invalid person Id:" + id);
         model.addAttribute("people", personService.findAll());
-        model.addAttribute("employee", employee.get());
+        model.addAttribute("employee", employee);
 
         return "employees/update-employee";
     }
@@ -78,14 +78,14 @@ public class EmployeesController {
                 model.addAttribute("people", personService.findAll());
                 return "employees/edit/" + employee.getBusinessentityid();
             }
-            employeeService.save(employee);
+            employeeService.edit(employee, employee.getBusinessentityid(), employee.getBusinessentityid());
         }
         return "redirect:/employees/";
     }
 
     @GetMapping("/employees/showDetails/{id}")
     public String showDetails(@PathVariable("id") int id, Model model) {
-        model.addAttribute("employee", employeeService.findById(id).get());
+        model.addAttribute("employee", employeeService.findById(id));
         return "employees/show-details";
     }
 }

@@ -9,7 +9,7 @@ public interface EmployeeService {
 
     public Employee edit(Employee employee, Integer personId, Integer businessId);
 
-    public Optional<Employee> findById(int i);
+    public Employee findById(int i);
 
     public Iterable<Employee> findAll();
 

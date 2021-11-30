@@ -6,37 +6,35 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import co.edu.icesi.tintegracion.dao.EmployeeDao;
 import co.edu.icesi.tintegracion.model.hr.Employee;
 import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
 import co.edu.icesi.tintegracion.repositories.EmployeePayHistoryRepositoryInt;
-import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeePayHistoryService;
 
 @Service
 public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
 
     private EmployeePayHistoryRepositoryInt employeePayHistoryRepositoryInt;
-    private EmployeeRepositoryInt employeeRepositoryInt;
+    private EmployeeDao employeeRepositoryInt;
 
     public EmployeepayhistoryServiceImp(EmployeePayHistoryRepositoryInt employeePayHistoryRepositoryInt,
-            EmployeeRepositoryInt employeeRepositoryInt) {
+            EmployeeDao employeeRepositoryInt) {
         this.employeePayHistoryRepositoryInt = employeePayHistoryRepositoryInt;
         this.employeeRepositoryInt = employeeRepositoryInt;
     }
 
     public Employeepayhistory save(Employeepayhistory employeepayhistory, Integer employeeId) {
 
-       
-
         employeepayhistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
-       
+
         return employeePayHistoryRepositoryInt.save(employeepayhistory);
     }
 
     public Employeepayhistory edit(Integer employeeId, Employeepayhistory employeepayhistory,
             Integer employeepayhistoryId) {
 
-        Optional<Employee> employee = employeeRepositoryInt.findById(employeeId);
+        Employee employee = employeeRepositoryInt.findById(employeeId);
 
         Optional<Employeepayhistory> employeepayhistoryToEdit = employeePayHistoryRepositoryInt
                 .findById(employeepayhistoryId);
@@ -45,7 +43,7 @@ public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
             throw new RuntimeException("Employeepayhistory not found");
         } else {
 
-            if (!employee.isPresent()) {
+            if (!(employee != null)) {
                 throw new RuntimeException("Employee not found");
             } else if (employeepayhistory == null) {
                 throw new RuntimeException("Employeepayhistory cannot be null");

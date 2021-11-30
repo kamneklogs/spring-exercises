@@ -1,60 +1,52 @@
 package co.edu.icesi.tintegracion.services.implementations;
 
 import java.util.Date;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import co.edu.icesi.tintegracion.dao.EmployeeDao;
 import co.edu.icesi.tintegracion.dao.PersonDao;
 import co.edu.icesi.tintegracion.model.hr.Employee;
-import co.edu.icesi.tintegracion.model.person.Businessentity;
-import co.edu.icesi.tintegracion.model.person.Person;
 import co.edu.icesi.tintegracion.repositories.BussinesEntityRepositoryInt;
-import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeService;
 
 @Service
 public class EmployeeServiceImp implements EmployeeService {
 
-    private EmployeeRepositoryInt employeeRepositoryInt;
+    private EmployeeDao employeeRepositoryInt;
 
-    private PersonDao personRepositoryInt;
-
-    private BussinesEntityRepositoryInt businessEntityRepositoryInt;
-
-    public EmployeeServiceImp(EmployeeRepositoryInt employeeRepositoryInt, PersonDao personRepositoryInt,
+    public EmployeeServiceImp(EmployeeDao employeeRepositoryInt, PersonDao personRepositoryInt,
             BussinesEntityRepositoryInt businessEntityRepositoryInt) {
         this.employeeRepositoryInt = employeeRepositoryInt;
-        this.personRepositoryInt = personRepositoryInt;
-        this.businessEntityRepositoryInt = businessEntityRepositoryInt;
     }
 
     public Employee save(Employee employee) {
 
         employee.setHiredate(new Date());
-        return employeeRepositoryInt.save(employee);
+        employeeRepositoryInt.save(employee);
+
+        return employeeRepositoryInt.findById(employee.getBusinessentityid());
     }
 
     public Employee edit(Employee employee, Integer personId, Integer businessId) {
 
-        Person person = personRepositoryInt.findById(personId);
-        Optional<Businessentity> bussinessEntity = businessEntityRepositoryInt.findById(businessId);
-        Optional<Employee> employeeToEdit = employeeRepositoryInt.findById(employee.getBusinessentityid());
+        Employee employeeToEdit = employeeRepositoryInt.findById(employee.getBusinessentityid());
 
-        Employee newEmployee = employeeToEdit.get();
+        Employee newEmployee = employeeToEdit;
 
         newEmployee.setGender(employee.getGender());
         newEmployee.setHiredate(employee.getHiredate());
         newEmployee.setJobtitle(employee.getJobtitle());
 
-        bussinessEntity.get().setPerson(person);
-        person.setBusinessentity(bussinessEntity.get());
         newEmployee.setBusinessentityid(businessId);
 
-        return employeeRepositoryInt.save(newEmployee);
+        employee.setBusinessentityid(employeeToEdit.getBusinessentityid());
+        employee.setHiredate(new Date());
+        employeeRepositoryInt.update(employee);
+        return employeeRepositoryInt.findById(newEmployee.getBusinessentityid());
     }
 
-    public Optional<Employee> findById(int i) {
+    public Employee findById(int i) {
         return employeeRepositoryInt.findById(i);
     }
 

@@ -6,23 +6,23 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.edu.icesi.tintegracion.dao.EmployeeDao;
 import co.edu.icesi.tintegracion.model.hr.Employee;
 import co.edu.icesi.tintegracion.model.hr.Employeedepartmenthistory;
 import co.edu.icesi.tintegracion.model.hr.Shift;
 import co.edu.icesi.tintegracion.repositories.EmployeeDepartmentHistoryRepositoryInt;
-import co.edu.icesi.tintegracion.repositories.EmployeeRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeDepartmentHistoryService;
 
 @Service
 public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHistoryService {
 
     private EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt;
-    private EmployeeRepositoryInt employeeRepositoryInt;
+    private EmployeeDao employeeRepositoryInt;
 
     @Autowired
     public EmployeeDepartmentHistoryServiceImp(
             EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt,
-            EmployeeRepositoryInt employeeRepositoryInt) {
+            EmployeeDao employeeRepositoryInt) {
         this.employeeDepartmentHistoryRepositoryInt = employeeDepartmentHistoryRepositoryInt;
         this.employeeRepositoryInt = employeeRepositoryInt;
     }
@@ -35,12 +35,12 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
 
     public Employeedepartmenthistory edit(Employeedepartmenthistory employeedepartmenthistory, Integer employeeId) {
 
-        Optional<Employee> employee = employeeRepositoryInt.findById(employeeId);
+        Employee employee = employeeRepositoryInt.findById(employeeId);
 
-        if (!employee.isPresent()) {
+        if (!(employee != null)) {
             throw new RuntimeException("Employee not found");
         } else {
-            employeedepartmenthistory.setEmployee(employee.get());
+            employeedepartmenthistory.setEmployee(employee);
             Timestamp actualdate = new Timestamp(System.currentTimeMillis());
 
             if (!actualdate.before(employeedepartmenthistory.getEnddate())) {
