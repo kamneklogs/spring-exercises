@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import co.edu.icesi.tintegracion.dao.EmployeeDao;
 import co.edu.icesi.tintegracion.dao.PersonDao;
 import co.edu.icesi.tintegracion.model.hr.Employee;
-import co.edu.icesi.tintegracion.repositories.BussinesEntityRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeService;
 
 @Service
@@ -16,8 +15,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     private EmployeeDao employeeRepositoryInt;
 
-    public EmployeeServiceImp(EmployeeDao employeeRepositoryInt, PersonDao personRepositoryInt,
-            BussinesEntityRepositoryInt businessEntityRepositoryInt) {
+    public EmployeeServiceImp(EmployeeDao employeeRepositoryInt, PersonDao personRepositoryInt) {
         this.employeeRepositoryInt = employeeRepositoryInt;
     }
 
@@ -58,7 +56,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
     @Override
     public List<Employee> findByTittle(String tittle) {
-        
+
         return employeeRepositoryInt.findByTittle(tittle);
     }
 
