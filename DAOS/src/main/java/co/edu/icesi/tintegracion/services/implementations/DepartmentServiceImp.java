@@ -1,7 +1,6 @@
 package co.edu.icesi.tintegracion.services.implementations;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -47,6 +46,6 @@ public class DepartmentServiceImp implements DepartmentService {
     public Department findById(Integer id) {
 
         return departmentRepositoryInt.findById(id);
-    }
+    }   
 
 }

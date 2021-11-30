@@ -1,6 +1,7 @@
 package co.edu.icesi.tintegracion.services.implementations;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -56,9 +57,9 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
-    public Employee findByTittle(String tittle) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Employee> findByTittle(String tittle) {
+        
+        return employeeRepositoryInt.findByTittle(tittle);
     }
 
 }

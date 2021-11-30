@@ -1,27 +1,26 @@
 package co.edu.icesi.tintegracion.services.implementations;
 
 import java.sql.Timestamp;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.edu.icesi.tintegracion.dao.DepartmentHistoryDao;
 import co.edu.icesi.tintegracion.dao.EmployeeDao;
 import co.edu.icesi.tintegracion.model.hr.Employee;
 import co.edu.icesi.tintegracion.model.hr.Employeedepartmenthistory;
 import co.edu.icesi.tintegracion.model.hr.Shift;
-import co.edu.icesi.tintegracion.repositories.EmployeeDepartmentHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeDepartmentHistoryService;
 
 @Service
 public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHistoryService {
 
-    private EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt;
+    private DepartmentHistoryDao employeeDepartmentHistoryRepositoryInt;
     private EmployeeDao employeeRepositoryInt;
 
     @Autowired
     public EmployeeDepartmentHistoryServiceImp(
-            EmployeeDepartmentHistoryRepositoryInt employeeDepartmentHistoryRepositoryInt,
+            DepartmentHistoryDao employeeDepartmentHistoryRepositoryInt,
             EmployeeDao employeeRepositoryInt) {
         this.employeeDepartmentHistoryRepositoryInt = employeeDepartmentHistoryRepositoryInt;
         this.employeeRepositoryInt = employeeRepositoryInt;
@@ -30,7 +29,8 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
     public Employeedepartmenthistory save(Employeedepartmenthistory employeedepartmenthistory) {
 
         employeedepartmenthistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
-        return employeeDepartmentHistoryRepositoryInt.save(employeedepartmenthistory);
+        employeeDepartmentHistoryRepositoryInt.save(employeedepartmenthistory);
+        return employeeDepartmentHistoryRepositoryInt.findById(employeedepartmenthistory.getBusinessentityid());
     }
 
     public Employeedepartmenthistory edit(Employeedepartmenthistory employeedepartmenthistory, Integer employeeId) {
@@ -60,7 +60,9 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
         }
 
         employeedepartmenthistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
-        return employeeDepartmentHistoryRepositoryInt.save(employeedepartmenthistory);
+        employeeDepartmentHistoryRepositoryInt.update(employeedepartmenthistory);
+        return employeeDepartmentHistoryRepositoryInt.findById(employeedepartmenthistory.getBusinessentityid());
+
     }
 
     @Override
@@ -70,7 +72,7 @@ public class EmployeeDepartmentHistoryServiceImp implements EmployeeDepartmentHi
     }
 
     @Override
-    public Optional<Employeedepartmenthistory> findById(Integer id) {
+    public Employeedepartmenthistory findById(Integer id) {
 
         return employeeDepartmentHistoryRepositoryInt.findById(id);
     }

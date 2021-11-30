@@ -1,7 +1,5 @@
 package co.edu.icesi.tintegracion.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,10 +65,10 @@ public class DepartmentsHistoryController {
 
     @GetMapping("/departmentsHistory/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        Optional<Employeedepartmenthistory> dHistory = employeeDepartmentHistoryService.findById(id);
+        Employeedepartmenthistory dHistory = employeeDepartmentHistoryService.findById(id);
         if (dHistory == null)
             throw new IllegalArgumentException("Invalid person Id:" + id);
-        model.addAttribute("dHistory", dHistory.get());
+        model.addAttribute("dHistory", dHistory);
         model.addAttribute("employees", employeeService.findAll());
         return "department-history/update-departmentH";
     }
@@ -86,14 +84,14 @@ public class DepartmentsHistoryController {
                 return "departmentsHistory/edit/" + dHistory.getBusinessentityid();
             }
             dHistory.setBusinessentityid(id);
-            employeeDepartmentHistoryService.save(dHistory);
+            employeeDepartmentHistoryService.edit(dHistory, dHistory.getEmployee().getBusinessentityid());
         }
         return "redirect:/departmentsHistory/";
     }
 
     @GetMapping("/departmentsHistory/showDetails/{id}")
     public String showDetails(@PathVariable("id") int id, Model model) {
-        model.addAttribute("dHistory", employeeDepartmentHistoryService.findById(id).get());
+        model.addAttribute("dHistory", employeeDepartmentHistoryService.findById(id));
         return "department-history/show-details";
     }
 }

@@ -1,7 +1,5 @@
 package co.edu.icesi.tintegracion.services.interfaces;
 
-import java.util.Optional;
-
 import co.edu.icesi.tintegracion.model.hr.Employee;
 
 public interface EmployeeService {
@@ -11,7 +9,7 @@ public interface EmployeeService {
 
     public Employee findById(int i);
 
-    public Employee findByTittle(String tittle);
+    public Iterable<Employee> findByTittle(String tittle);
 
     public Iterable<Employee> findAll();
 
