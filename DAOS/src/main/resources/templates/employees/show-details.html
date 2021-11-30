@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Update User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+    />
+    <link rel="stylesheet" href="../css/shards.min.css" />
+  </head>
+  <body>
+    <div class="container my-1">
+      <h2 class="mb-5">Employee details</h2>
+      <div class="row">
+        <div class="col-md-5">
+          <form
+            action="#"
+            th:object="${employee}"
+            th:action="@{/employees/}"
+            method="get"
+          >
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label for="businessentityid" class="col-form-label">Id</label>
+                <input
+                  type="text"
+                  th:field="*{businessentityid}"
+                  class="form-control"
+                  id="businessentityid"
+                  readonly
+                />
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="birthdate" class="col-form-label">Birth date</label>
+                <input
+                  type="date"
+                  th:field="*{birthdate}"
+                  class="form-control"
+                  id="birthdate"
+                  placeholder="Birth date"
+                  readonly
+                />
+                <span
+                  th:if="${#fields.hasErrors('birthdate')}"
+                  th:errors="*{birthdate}"
+                  class="text-danger"
+                ></span>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="jobtitle" class="col-form-label">Job title</label>
+                <input
+                  type="text"
+                  th:field="*{jobtitle}"
+                  class="form-control"
+                  id="jobtitle"
+                  placeholder="Job tittle"
+                  readonly
+                />
+                <span
+                  th:if="${#fields.hasErrors('jobtitle')}"
+                  th:errors="*{jobtitle}"
+                  class="text-danger"
+                ></span>
+              </div>
+
+              <div class="form-group col-md-6" style="width: auto">
+                <label for="person" class="col-form-label" style="width: auto"
+                  >Person id (click to see)</label
+                >
+
+                <a
+                  th:href="@{/people/showDetails/{id}(id=${employee.businessentityid})}"
+                >
+                  <input
+                    type="text"
+                    th:field="*{businessentityid}"
+                    class="btn btn-secondary"
+                    id="businessentityid"
+                    placeholder="Job tittle"
+                    readonly
+                    style="cursor: hand"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 mt-3">
+                <a href="/employees/" class="btn btn-primary">Go to back</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
