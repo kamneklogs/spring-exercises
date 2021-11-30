@@ -7,18 +7,18 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import co.edu.icesi.tintegracion.dao.EmployeeDao;
+import co.edu.icesi.tintegracion.dao.EmployeeayHistoryDao;
 import co.edu.icesi.tintegracion.model.hr.Employee;
 import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
-import co.edu.icesi.tintegracion.repositories.EmployeePayHistoryRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeePayHistoryService;
 
 @Service
 public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
 
-    private EmployeePayHistoryRepositoryInt employeePayHistoryRepositoryInt;
+    private EmployeeayHistoryDao employeePayHistoryRepositoryInt;
     private EmployeeDao employeeRepositoryInt;
 
-    public EmployeepayhistoryServiceImp(EmployeePayHistoryRepositoryInt employeePayHistoryRepositoryInt,
+    public EmployeepayhistoryServiceImp(EmployeeayHistoryDao employeePayHistoryRepositoryInt,
             EmployeeDao employeeRepositoryInt) {
         this.employeePayHistoryRepositoryInt = employeePayHistoryRepositoryInt;
         this.employeeRepositoryInt = employeeRepositoryInt;
@@ -28,7 +28,9 @@ public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
 
         employeepayhistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
 
-        return employeePayHistoryRepositoryInt.save(employeepayhistory);
+        employeePayHistoryRepositoryInt.save(employeepayhistory);
+
+        return employeePayHistoryRepositoryInt.findById(employeepayhistory.getBusinessentityid());
     }
 
     public Employeepayhistory edit(Integer employeeId, Employeepayhistory employeepayhistory,
@@ -36,10 +38,10 @@ public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
 
         Employee employee = employeeRepositoryInt.findById(employeeId);
 
-        Optional<Employeepayhistory> employeepayhistoryToEdit = employeePayHistoryRepositoryInt
+        Employeepayhistory employeepayhistoryToEdit = employeePayHistoryRepositoryInt
                 .findById(employeepayhistoryId);
 
-        if (!employeepayhistoryToEdit.isPresent()) {
+        if (!(employeepayhistoryToEdit != null)) {
             throw new RuntimeException("Employeepayhistory not found");
         } else {
 
@@ -54,18 +56,20 @@ public class EmployeepayhistoryServiceImp implements EmployeePayHistoryService {
             }
         }
 
-        Employeepayhistory newEmployeepayHistory = employeepayhistoryToEdit.get();
+        Employeepayhistory newEmployeepayHistory = employeepayhistoryToEdit;
 
         newEmployeepayHistory.setPayfrequency(employeepayhistory.getPayfrequency());
         newEmployeepayHistory.setRate(employeepayhistory.getRate());
 
         newEmployeepayHistory.setModifieddate(new Timestamp(System.currentTimeMillis()));
 
-        return employeePayHistoryRepositoryInt.save(newEmployeepayHistory);
+        employeePayHistoryRepositoryInt.update(newEmployeepayHistory);
+
+        return employeePayHistoryRepositoryInt.findById(newEmployeepayHistory.getBusinessentityid());
     }
 
     public Employeepayhistory findById(Integer employeepayhistoryPk) {
-        return employeePayHistoryRepositoryInt.findById(employeepayhistoryPk).get();
+        return employeePayHistoryRepositoryInt.findById(employeepayhistoryPk);
     }
 
     @Override

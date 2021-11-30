@@ -56,10 +56,10 @@ public class DepartmentsController {
 
     @GetMapping("/departments/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        Optional<Department> department = departmentService.findById(id);
+        Department department = departmentService.findById(id);
         if (department == null)
             throw new IllegalArgumentException("Invalid person Id:" + id);
-        model.addAttribute("department", department.get());
+        model.addAttribute("department", department);
 
         return "departments/update-department";
     }
@@ -71,14 +71,13 @@ public class DepartmentsController {
 
             if (bindingResult.hasErrors()) {
                 model.addAttribute("department", department);
-                return "employees/edit/" + department.getDepartmentid();
+                return "department/edit/" + department.getDepartmentid();
             }
             department.setDepartmentid(id);
-            departmentService.save(department);
+            departmentService.edit(department);
         }
         return "redirect:/departments/";
     }
-
 
     @GetMapping("/departments/showDetails/{id}")
     public String showDetails(@PathVariable("id") int id, Model model) {

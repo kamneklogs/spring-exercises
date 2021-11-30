@@ -77,7 +77,8 @@ public class PayHistoryController {
                 model.addAttribute("employees", employeeService.findAll());
                 return "employees/edit/" + pHistory.getBusinessentityid();
             }
-            employeePayHistoryService.save(pHistory, pHistory.getBusinessentityid());
+
+            employeePayHistoryService.edit(pHistory.getBusinessentityid(), pHistory, pHistory.getBusinessentityid());
         }
         return "redirect:/payment/";
     }

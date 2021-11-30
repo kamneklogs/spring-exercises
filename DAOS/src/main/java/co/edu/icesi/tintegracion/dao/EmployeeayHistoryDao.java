@@ -3,6 +3,8 @@ package co.edu.icesi.tintegracion.dao;
 import java.util.Date;
 import java.util.List;
 
+import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -10,59 +12,52 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.edu.icesi.tintegracion.model.hr.Employee;
-
 @Repository
 @Scope("singleton")
-public class EmployeeDao implements IEmployeeDao {
+public class EmployeeayHistoryDao implements IEmployeeayHistoryDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional
     @Override
-    public void save(Employee entity) {
+    public void save(Employeepayhistory entity) {
         entityManager.persist(entity);
 
     }
 
     @Transactional
     @Override
-    public void update(Employee entity) {
+    public void update(Employeepayhistory entity) {
         entityManager.merge(entity);
 
     }
 
     @Transactional
     @Override
-    public void delete(Employee entity) {
+    public void delete(Employeepayhistory entity) {
         entityManager.remove(entity);
 
     }
 
     @Override
-    public Employee findById(Integer codigo) {
-        return entityManager.find(Employee.class, codigo);
+    public Employeepayhistory findById(Integer codigo) {
+        return entityManager.find(Employeepayhistory.class, codigo);
 
     }
 
     @Override
-    public List<Employee> findAll() {
-        String jpql = "Select a from Employee a";
+    public List<Employeepayhistory> findByModifiedDate(Date date) {
+        String jpql = "Select a from Employeepayhistory a where a.modifieddate = :" + date;
+
         return entityManager.createQuery(jpql).getResultList();
     }
 
     @Override
-    public List<Employee> findByTittle(String tittle) {
-        String jpql = "Select a from Employee a where a.tittle = '" + tittle + "'";
+    public List<Employeepayhistory> findAll() {
+        String jpql = "Select a from Employeepayhistory a";
         return entityManager.createQuery(jpql).getResultList();
-    }
 
-    @Override
-    public List<Employee> findByHireDate(Date date) {
-        String jpql = "Select a from Employee a where a.hireDate = :" + date;
-
-        return entityManager.createQuery(jpql).getResultList();
     }
 
 }

@@ -5,23 +5,25 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import co.edu.icesi.tintegracion.dao.DepartmentDao;
 import co.edu.icesi.tintegracion.model.hr.Department;
-import co.edu.icesi.tintegracion.repositories.DepartmentRepositoryInt;
 import co.edu.icesi.tintegracion.services.interfaces.DepartmentService;
 
 @Service
 public class DepartmentServiceImp implements DepartmentService {
 
-    private DepartmentRepositoryInt departmentRepositoryInt;
+    private DepartmentDao departmentRepositoryInt;
 
-    public DepartmentServiceImp(DepartmentRepositoryInt departmentRepositoryInt) {
+    public DepartmentServiceImp(DepartmentDao departmentRepositoryInt) {
         this.departmentRepositoryInt = departmentRepositoryInt;
     }
 
     public Department save(Department department) {
 
         department.setModifieddate(new Timestamp(System.currentTimeMillis()));
-        return departmentRepositoryInt.save(department);
+        departmentRepositoryInt.save(department);
+
+        return departmentRepositoryInt.findById(department.getDepartmentid());
     }
 
     public Department edit(Department department) {
@@ -33,7 +35,8 @@ public class DepartmentServiceImp implements DepartmentService {
         }
 
         department.setModifieddate(new Timestamp(System.currentTimeMillis()));
-        return departmentRepositoryInt.save(department);
+        departmentRepositoryInt.update(department);
+        return departmentRepositoryInt.findById(department.getDepartmentid());
     }
 
     public Iterable<Department> findAll() {
@@ -41,7 +44,7 @@ public class DepartmentServiceImp implements DepartmentService {
     }
 
     @Override
-    public Optional<Department> findById(Integer id) {
+    public Department findById(Integer id) {
 
         return departmentRepositoryInt.findById(id);
     }

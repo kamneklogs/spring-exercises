@@ -55,4 +55,10 @@ public class EmployeeServiceImp implements EmployeeService {
         return employeeRepositoryInt.findAll();
     }
 
+    @Override
+    public Employee findByTittle(String tittle) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

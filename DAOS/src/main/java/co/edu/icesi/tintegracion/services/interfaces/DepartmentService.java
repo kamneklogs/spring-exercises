@@ -11,5 +11,5 @@ public interface DepartmentService {
 
     public Iterable<Department> findAll();
 
-    public Optional<Department> findById(Integer id);
+    public Department findById(Integer id);
 }

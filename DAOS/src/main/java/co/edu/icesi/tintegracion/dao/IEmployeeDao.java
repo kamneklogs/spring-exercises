@@ -1,5 +1,6 @@
 package co.edu.icesi.tintegracion.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import co.edu.icesi.tintegracion.model.hr.Employee;
@@ -12,6 +13,10 @@ public interface IEmployeeDao {
     public void delete(Employee entity);
 
     public Employee findById(Integer codigo);
+
+    public List<Employee> findByTittle(String tittle);
+
+    public List<Employee> findByHireDate(Date date);
 
     public List<Employee> findAll();
 }

@@ -11,6 +11,8 @@ public interface EmployeeService {
 
     public Employee findById(int i);
 
+    public Employee findByTittle(String tittle);
+
     public Iterable<Employee> findAll();
 
 }
