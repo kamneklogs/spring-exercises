@@ -1,5 +1,6 @@
 package co.edu.icesi.tintegracion.dao;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface IEmployeeDao {
     public List<Employee> findByHireDate(Date date);
 
     public List<Employee> findAll();
+
+    public List<Employee> findAllEmployeesWithCountDeparments(Timestamp startdate, Timestamp enddate);
+
 }

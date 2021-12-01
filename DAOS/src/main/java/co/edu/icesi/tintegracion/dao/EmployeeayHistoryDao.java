@@ -7,6 +7,7 @@ import co.edu.icesi.tintegracion.model.hr.Employeepayhistory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -58,6 +59,16 @@ public class EmployeeayHistoryDao implements IEmployeeayHistoryDao {
         String jpql = "Select a from Employeepayhistory a";
         return entityManager.createQuery(jpql).getResultList();
 
+    }
+
+    @Override
+    public List<Employeepayhistory> findAllEmployeesPayHistory() {
+        String jpql = " (Select a from Employeepayhistory a, Employeedepartmenthistory b where a.employee.businessentityid = b.businessentityid AND (Select count(h) from Employeedepartmenthistory h"
+                + " Where h.employee.businessentityid = a.businessentityid) > 1";
+
+        Query query = entityManager.createQuery(jpql);
+
+        return query.getResultList();
     }
 
 }

@@ -1,10 +1,12 @@
 package co.edu.icesi.tintegracion.dao;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
@@ -60,9 +62,25 @@ public class EmployeeDao implements IEmployeeDao {
 
     @Override
     public List<Employee> findByHireDate(Date date) {
-        String jpql = "Select a from Employee a where a.hireDate = :" + date;
-
-        return entityManager.createQuery(jpql).getResultList();
+        String jpql = "Select a from Employee a where a.hireDate = :date";
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("date", date);
+        return query.getResultList();
     }
+
+    @Override
+    public List<Employee> findAllEmployeesWithCountDeparments(Timestamp startdate, Timestamp enddate) {
+
+        String jpql = "Select a from Employee a where a.hireDate >= :startdate AND a.hireDate <= :enddate AND(Select count(h) from Employeedepartmenthistory h"
+                + " Where h.employee.businessentityid = a.businessentityid And h.startdate >= :startdate AND h.enddate <= :enddate) > 0";
+
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("startdate", startdate);
+        query.setParameter("enddate", enddate);
+
+        return query.getResultList();
+    }
+
+   
 
 }

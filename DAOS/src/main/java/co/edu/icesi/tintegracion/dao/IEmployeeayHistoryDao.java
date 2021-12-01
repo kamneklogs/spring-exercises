@@ -17,4 +17,7 @@ public interface IEmployeeayHistoryDao {
     public List<Employeepayhistory> findByModifiedDate(Date date);
 
     public List<Employeepayhistory> findAll();
+
+    public List<Employeepayhistory> findAllEmployeesPayHistory();
+
 }
