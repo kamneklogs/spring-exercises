@@ -10,8 +10,8 @@
 	<groupId>co.edu.icesi</groupId>
 	<artifactId>TallerThymeleaf</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TallerThymeleaf</name>
-	<description>Taller 2</description>
+	<name>CamiloGutierrezT3</name>
+	<description>Taller 3</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
