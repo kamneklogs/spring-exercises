@@ -1,7 +1,9 @@
 package co.edu.icesi.tintegracion;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Iterator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +30,9 @@ import co.edu.icesi.tintegracion.services.interfaces.EmployeePayHistoryService;
 import co.edu.icesi.tintegracion.services.interfaces.EmployeeService;
 import co.edu.icesi.tintegracion.services.interfaces.PersonService;
 import co.edu.icesi.tintegracion.services.interfaces.UserService;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @SpringBootApplication
 public class TintegracionApplication {
 	@Bean
@@ -167,6 +171,27 @@ public class TintegracionApplication {
 		payHistory2.setRate(new BigDecimal(2840));
 
 		employeePayHistoryService.save(payHistory2, employee3.getBusinessentityid());
+
+		Iterable<Person> people = personService.findAll();
+
+		for (Person person5 : people) {
+			log.info(person5.getFirstname());
+		}
+
+		employeeService.findByTittle("Project owner");
+
+		for (Employee e : employeeService.findByTittle("Project owner")) {
+			log.info(e.getJobtitle());
+		}
+
+		for (Employee e : employeeService.findByHireDate(new Date())) {
+			log.info(e.getBusinessentityid());
+		}
+
+		for (Employee e : employeeService.findAllEmployeesWithCountDeparments(new Timestamp(100000),
+				new Timestamp(System.currentTimeMillis()))) {
+			log.info(e.getBusinessentityid());
+		}
 
 	}
 

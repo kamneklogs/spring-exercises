@@ -56,13 +56,13 @@ public class EmployeeDao implements IEmployeeDao {
 
     @Override
     public List<Employee> findByTittle(String tittle) {
-        String jpql = "Select a from Employee a where a.tittle = '" + tittle + "'";
+        String jpql = "Select a from Employee a where a.jobtitle = '" + tittle + "'";
         return entityManager.createQuery(jpql).getResultList();
     }
 
     @Override
     public List<Employee> findByHireDate(Date date) {
-        String jpql = "Select a from Employee a where a.hireDate = :date";
+        String jpql = "Select a from Employee a where a.hiredate = :date";
         Query query = entityManager.createQuery(jpql);
         query.setParameter("date", date);
         return query.getResultList();
@@ -71,7 +71,7 @@ public class EmployeeDao implements IEmployeeDao {
     @Override
     public List<Employee> findAllEmployeesWithCountDeparments(Timestamp startdate, Timestamp enddate) {
 
-        String jpql = "Select a from Employee a where a.hireDate >= :startdate AND a.hireDate <= :enddate AND(Select count(h) from Employeedepartmenthistory h"
+        String jpql = "Select a from Employee a where a.hiredate >= :startdate AND a.hiredate <= :enddate AND(Select count(h) from Employeedepartmenthistory h"
                 + " Where h.employee.businessentityid = a.businessentityid And h.startdate >= :startdate AND h.enddate <= :enddate) > 0";
 
         Query query = entityManager.createQuery(jpql);

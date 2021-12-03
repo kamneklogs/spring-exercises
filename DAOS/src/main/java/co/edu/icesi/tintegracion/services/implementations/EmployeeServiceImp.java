@@ -1,5 +1,6 @@
 package co.edu.icesi.tintegracion.services.implementations;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -58,6 +59,18 @@ public class EmployeeServiceImp implements EmployeeService {
     public List<Employee> findByTittle(String tittle) {
 
         return employeeRepositoryInt.findByTittle(tittle);
+    }
+
+    @Override
+    public Iterable<Employee> findByHireDate(Date date) {
+
+        return employeeRepositoryInt.findByHireDate(date);
+    }
+
+    @Override
+    public List<Employee> findAllEmployeesWithCountDeparments(Timestamp startdate, Timestamp enddate) {
+
+        return employeeRepositoryInt.findAllEmployeesWithCountDeparments(startdate, enddate);
     }
 
 }
