@@ -1,3 +1,3 @@
 # spring-exercises
 
-Learning Spring Boot
+Learning Spring
